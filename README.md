@@ -21,3 +21,5 @@ Front End Section
 
 
 - you still need to run `yarn install` to get your node_modules
+
+NETLIFY SITE: https://determined-sinoussi-e19623.netlify.com/
