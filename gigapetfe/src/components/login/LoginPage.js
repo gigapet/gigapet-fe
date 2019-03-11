@@ -37,7 +37,7 @@ const LogInButton = styled.button`
     color:white;
     background: midnightblue;
     padding: 2rem 5rem;
-    font-size: 1.2rem
+    font-size: 2rem
     background-color: rgb(45, 45, 45)
     width:100%
     text-align: center
@@ -51,10 +51,12 @@ const LogInButton = styled.button`
         background:teal;
     }
 `
-
+const DontHaveLogin = styled.h2`
+  font-size: 1.5rem;
+`
 const SignUp = styled.button`
     color: white;
-    font-size: 1.2rem;
+    font-size: 2rem;
     margin-top: 1rem;
     background: teal;
     padding: 1.9rem 3.6rem
@@ -97,6 +99,7 @@ export class LoginPage extends Component {
           value = {this.state.username}
           name = "username"
           onChange = {this.handleChanges}
+          required
           />
 
           <LogInInput placeholder = "password..."
@@ -104,10 +107,11 @@ export class LoginPage extends Component {
            value = {this.state.password}
            name = "password"
            onChange = {this.handleChanges}
+           required
            />
         </Form>
         <LogInButton>LogIn</LogInButton>
-        <h2>Don't have an account? Not a problem...</h2>
+        <DontHaveLogin>Don't have an account? Not a problem...</DontHaveLogin>
         <Link to="/signup"><SignUp>Sign Up!</SignUp></Link>
       </LogInPage>
     )

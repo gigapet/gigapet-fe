@@ -12,12 +12,12 @@ const SignupForm = styled.form`
 `;
 
 const Input = styled.input`
-    width:15rem;
-    height:1.5rem;
-    font-size:1.2rem;
-    padding:1rem;
-    margin:1rem;
-    border-radius:1rem;
+    width: 25rem;
+    height: 3rem;
+    font-size: 1.8rem;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 1rem;
     border: 2px solid black;
     text-align: center;
 `;
@@ -62,6 +62,7 @@ class SignUp extends React.Component {
                     value = {this.state.firstname}
                     name = "firstname"
                     onChange = {this.handleChanges}
+                    required
                     />
 
                     <Input 
@@ -70,6 +71,7 @@ class SignUp extends React.Component {
                     value = {this.state.lastname}
                     name = "lastname"
                     onChange = {this.handleChanges}
+                    required
                     />
 
                     <Input 
@@ -78,6 +80,7 @@ class SignUp extends React.Component {
                     value = {this.state.email}
                     name = "email"
                     onChange = {this.handleChanges}
+                    required
                     />
 
                     <Input 
@@ -86,6 +89,7 @@ class SignUp extends React.Component {
                     value = {this.state.password}
                     name = "password"
                     onChange = {this.handleChanges}
+                    required
                     />
 
                     <Input 
@@ -94,6 +98,7 @@ class SignUp extends React.Component {
                     value = {this.state.verifypassword}
                     name = "verifypassword"
                     onChange = {this.handleChanges}
+                    required
                     />
                     <Button>Submit</Button>
                     <Link to = "/"><Button> Login </Button></Link>

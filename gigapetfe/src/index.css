@@ -1,3 +1,7 @@
+*{
+  font-size: 62.5%;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -12,3 +16,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+h1 {
+  font-size: 4rem;
+ }
+ 
+ h2 {
+  font-size: 3.2rem;
+  padding-bottom: 10px;
+ }
+ 
+ h4 {
+  font-size: 2.5rem;
+  padding-bottom: 10px;
+ }
+ 
+ p {
+  line-height: 1.5;
+  font-size: 1.6rem;
+  padding-bottom: 10px;
+ }
