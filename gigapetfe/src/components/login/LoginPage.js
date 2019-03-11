@@ -86,7 +86,7 @@ export class LoginPage extends Component {
            onChange = {this.handleChanges}
            />
         </Form>
-        <LogInButton>Click Me...</LogInButton>
+        <LogInButton>Click Me......</LogInButton>
       </LogInPage>
     )
   }
