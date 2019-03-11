@@ -68,7 +68,7 @@ class SignUp extends React.Component {
     render() { 
         return (
             <div>
-                <SignupForm>
+                <SignupForm type = "submit">
                     <Title>Create your account!</Title>
                     <Input 
                     placeholder = "firstname..."
@@ -76,6 +76,7 @@ class SignUp extends React.Component {
                     value = {this.state.firstname}
                     name = "firstname"
                     onChange = {this.handleChanges}
+                    required
                     />
 
                     <Input 
@@ -84,32 +85,36 @@ class SignUp extends React.Component {
                     value = {this.state.lastname}
                     name = "lastname"
                     onChange = {this.handleChanges}
+                    required
                     />
 
                     <Input 
                     placeholder = "email..."
-                    type = "text"
+                    type = "email"
                     value = {this.state.email}
                     name = "email"
                     onChange = {this.handleChanges}
+                    required
                     />
 
                     <Input 
                     placeholder = "password..."
-                    type = "text"
+                    type = "password"
                     value = {this.state.password}
                     name = "password"
                     onChange = {this.handleChanges}
+                    required
                     />
 
                     <Input 
                     placeholder = "verifypassword..."
-                    type = "text"
+                    type = "password"
                     value = {this.state.verifypassword}
                     name = "verifypassword"
                     onChange = {this.handleChanges}
+                    required
                     />
-                    <Button>Submit</Button>
+                     <Button> Submit </Button>
                 </SignupForm>
             </div>
          );

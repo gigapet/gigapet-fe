@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
-import LoginPage from './components/login/LoginPage'
-import { Route } from 'react-router-dom';
-import SignUp from './components/login/SignUp';
-import NavBar from './components/NavBar/NavBar';
+import View from './components/login/view';
+
 
 class App extends Component {
+  constructor(props){
+    super();
+  }
+
   render() {
     return (
       <div className="App">
-        <NavBar/>
-        <Route exact path = "/login" component = {LoginPage}/>
-        <Route exact path = "/signup" component={SignUp}/>
+        <View/>
       </div>
     );
   }

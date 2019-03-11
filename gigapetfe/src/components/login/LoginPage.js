@@ -69,9 +69,10 @@ export class LoginPage extends Component {
 
   render() {
     return (
+    <div>
       <LogInPage>
         <LogInTitle>Welcome! Please Log In!</LogInTitle>
-        <Form>
+        <Form type ="submit">
           <LogInInput placeholder = "username..."
           type = "text"
           value = {this.state.username}
@@ -80,14 +81,16 @@ export class LoginPage extends Component {
           />
 
           <LogInInput placeholder = "password..."
-           type = "text"
+           type = "password"
            value = {this.state.password}
            name = "password"
            onChange = {this.handleChanges}
            />
-        </Form>
-        <LogInButton>LogIn</LogInButton>
+        </Form> 
+        <LogInButton onClick ={this.props.signIn}>Login</LogInButton>
+
       </LogInPage>
+    </div>
     )
   }
 }

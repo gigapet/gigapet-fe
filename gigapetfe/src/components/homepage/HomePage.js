@@ -5,7 +5,7 @@ import React from 'react';
 const HomePage = (props) => {
     return ( 
         <div>
-            I am homepage.
+           <h1>I am Homepage!</h1>
         </div>
      );
 }
