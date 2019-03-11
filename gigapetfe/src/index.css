@@ -13,6 +13,7 @@ code {
     monospace;
 } */
 
+/*Page reset*/
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -58,3 +59,54 @@ table {
 	border-spacing: 0;
 }
 
+/*defaults*/
+
+.container {
+  margin: 0 2%;
+  
+}
+
+.container img {
+  width: 100%;
+  height: auto;
+}
+
+/*main page header*/
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-evenly;
+  width: 70%;
+
+}
+
+.navbar a {
+  color: black;
+  text-decoration: none;
+  margin: 0 5%;
+}
+
+header img {
+
+}
+
+/*main page mobile*/
+@media(max-width:500px) {
+  header {
+    flex-direction: column;
+  }
+
+  .navbar {
+    flex-direction: column;
+  }
+}
+
+
+/*main info section left side*/
