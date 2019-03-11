@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "daypilot-pro-react": "https://npm.daypilot.org/daypilot-pro-react/trial/2018.2.3297.tar.gz",
+    "moment": "^2.24.0",
     "react": "^16.8.4",
-    "react-calendar": "^2.18.1",
     "react-dom": "^16.8.4",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.8",

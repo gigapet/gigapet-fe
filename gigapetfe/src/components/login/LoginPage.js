@@ -99,7 +99,6 @@ export class LoginPage extends Component {
           value = {this.state.username}
           name = "username"
           onChange = {this.handleChanges}
-          required
           />
 
           <LogInInput placeholder = "password..."
@@ -107,7 +106,6 @@ export class LoginPage extends Component {
            value = {this.state.password}
            name = "password"
            onChange = {this.handleChanges}
-           required
            />
         </Form>
         <LogInButton>LogIn</LogInButton>

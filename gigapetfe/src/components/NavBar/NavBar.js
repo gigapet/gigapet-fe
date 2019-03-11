@@ -23,8 +23,8 @@ const NavBar = () => {
     return ( 
     <div>
         <Nav>
-            <StyledLink to="/" component = {LoginPage}> Log In </StyledLink>
-            <StyledLink to="/signup" component = {SignUp}>  Sign In </StyledLink>
+            <StyledLink to="/login" component = {LoginPage}> Log In </StyledLink>
+            <StyledLink to="/signup" component = {SignUp}>  Sign Up </StyledLink>
             <StyledLink to="/home" component = {Home}>  Home </StyledLink>
         </Nav>
     </div>
