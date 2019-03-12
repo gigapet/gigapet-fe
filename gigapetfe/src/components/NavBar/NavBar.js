@@ -22,7 +22,7 @@ const NavBar = (props) => {
     return ( 
         <div>
             <Nav>
-                <StyledLink exact to="/" component = {LoginPage}> Log In </StyledLink>
+                <StyledLink to="/" component = {LoginPage}> Log In </StyledLink>
                 <StyledLink to="/signup" component = {SignUp}>  Sign Up </StyledLink>
                 <StyledLink to="/home" component = {Home}>  Home </StyledLink>
 

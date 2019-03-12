@@ -1,5 +1,11 @@
 import React from 'react';
 import Day from './Day';
+import styled from 'styled-components';
+
+const NumDayWeek = styled.div`
+    display:flex;
+
+`;
 
 class Week extends React.Component {
     render() {
@@ -33,9 +39,9 @@ class Week extends React.Component {
       }
   
       return (
-        <div className="row week" key={days[0]}>
+        <NumDayWeek className="row week" key={days[0]}>
           {days}
-        </div>
+        </NumDayWeek>
       );
     }
   

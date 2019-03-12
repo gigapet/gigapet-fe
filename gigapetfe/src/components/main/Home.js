@@ -3,6 +3,28 @@ import moment from 'moment';
 import DayNames from './DayNames';
 import Week from './Week';
 
+import styled from 'styled-components';
+
+const CalendarGeneral = styled.div`
+  background: midnightblue;
+  color:white;
+  height: 100vh;
+  padding:1rem;
+`;
+
+const MonthLabelContainer = styled.div`
+  display:flex;
+  justify-content:center;
+`;
+const MonthLabel = styled.h1`
+  margin:auto;
+`;
+const Arrows = styled.i`
+  font-size:2rem;
+  margin: auto 0;
+  padding: 0rem 3rem;
+`;
+
 export class Home extends Component {
   constructor(props) {
     super(props);
@@ -79,17 +101,17 @@ renderMonthLabel() {
 }
 render() {
   return (
-    <section className="calendar">
+    <CalendarGeneral>
       <header className="header">
-        <div className="month-display row">
-          <i className="arrow fa fa-angle-left" onClick={this.previous}/>
-          {this.renderMonthLabel()}
-          <i className="arrow fa fa-angle-right" onClick={this.next}/>
-        </div>
+        <MonthLabelContainer>
+          <Arrows className="arrow fa fa-angle-left" onClick={this.previous}/>
+          <MonthLabel>{this.renderMonthLabel()}</MonthLabel>
+          <Arrows className="arrow fa fa-angle-right" onClick={this.next}/>
+        </MonthLabelContainer>
         <DayNames />
       </header>
       {this.renderWeeks()}
-    </section>
+    </CalendarGeneral>
   );
 }
 }
