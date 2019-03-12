@@ -17,15 +17,16 @@ const MonthLabelContainer = styled.div`
   justify-content:center;
 `;
 const MonthLabel = styled.h1`
-  margin:auto;
+  margin: 0 auto 2rem;
+  font-size: 7rem;
 `;
 const Arrows = styled.i`
-  font-size:2rem;
+  font-size: 4rem;
   margin: auto 0;
   padding: 0rem 3rem;
 `;
 
-export class Home extends Component {
+export class Month extends Component {
   constructor(props) {
     super(props);
     
@@ -116,4 +117,4 @@ render() {
 }
 }
 
-export default Home
+export default Month;

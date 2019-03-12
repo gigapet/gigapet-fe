@@ -4,12 +4,16 @@ import styled from 'styled-components';
 const NumDay = styled.div`
     display:flex;
     justify-content:center;
-    width:14rem;
-    height:6rem;
+    width: 100%;
+    height: 9vh;
     align-items:center;
-    font-size:2rem;
-    margin:0 auto;
-    border: 1px solid white;
+    font-size: 2rem;
+    margin: 0 auto;
+   
+    :hover {
+      background: darkgrey;
+      color: black; 
+    }
 `;
 
 class Day extends React.Component {

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 const NumDayWeek = styled.div`
     display:flex;
-
 `;
 
 class Week extends React.Component {
