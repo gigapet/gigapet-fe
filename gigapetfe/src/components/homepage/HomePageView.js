@@ -2,6 +2,8 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import HomePageNav from './HomePageNav';
 import Month from './Month';
+import {WeekView} from './WeekView'
+import {DayView} from './DayView'
 
 
 class HomePageView extends React.Component {
@@ -15,7 +17,9 @@ class HomePageView extends React.Component {
       return ( 
          <div>
             <HomePageNav/>
-            <Route exact path = '/Month' component = {Month} />
+            <Route exact path = '/month' component = {Month} />
+            <Route exact path = '/week' component = {WeekView} />
+            <Route exact path = '/day' component = {DayView} />
 
          </div>
       )

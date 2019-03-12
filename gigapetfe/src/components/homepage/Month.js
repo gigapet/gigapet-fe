@@ -70,10 +70,7 @@ renderWeeks() {
   let count = 0;
   let monthIndex = date.month();
 
-  const {
-    selected,
-    month,
-  } = this.state;
+  const { selected, month } = this.state;
 
   while (!done) {
     weeks.push(
@@ -94,16 +91,14 @@ renderWeeks() {
 };
 
 renderMonthLabel() {
-  const {
-    month,
-  } = this.state;
+  const { month } = this.state;
 
   return <span className="month-label">{month.format("MMMM YYYY")}</span>;
 }
 render() {
   return (
     <CalendarGeneral>
-      <header className="header">
+      <header>
         <MonthLabelContainer>
           <Arrows className="arrow fa fa-angle-left" onClick={this.previous}/>
           <MonthLabel>{this.renderMonthLabel()}</MonthLabel>
