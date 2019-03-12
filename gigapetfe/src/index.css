@@ -71,6 +71,22 @@ table {
   height: auto;
 }
 
+h1 {
+  font-size: 2rem;
+  color: black;
+}
+
+h2, h3, h4, h5, h6 {
+  font-size: 1.6rem;
+  color: black;
+}
+
+p {
+  font-size: 1rem;
+  font-family: 'Times New Roman', Times, serif;
+
+}
+
 /*main page header*/
 
 header {
@@ -109,4 +125,20 @@ header img {
 }
 
 
-/*main info section left side*/
+/*main info section */
+.maininfo {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+/*left side*/
+.left-side {
+  display: flex;
+  flex-direction: column;
+}
+
+.left-side .top {
+  display: flex;
+  flex-direction: column;
+}
