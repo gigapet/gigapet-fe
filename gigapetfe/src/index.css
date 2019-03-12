@@ -60,67 +60,90 @@ table {
 }
 
 /*defaults*/
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+html, body {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Indie Flower', cursive;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+h2, h3, h4, h5 {
+  font-size: 3.2rem;
+  padding-bottom: 10px;
+}
+
+p {
+  line-height: 1.25;
+  font-size: 1.6rem;
+  padding-bottom: 10px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
 
 .container {
   margin: 0 2%;
   
 }
 
-.container img {
-  width: 100%;
-  height: auto;
-}
+/*header*/
 
-h1 {
-  font-size: 2rem;
-  color: black;
-}
-
-h2, h3, h4, h5, h6 {
-  font-size: 1.6rem;
-  color: black;
-}
-
-p {
-  font-size: 1rem;
-  font-family: 'Times New Roman', Times, serif;
-
-}
-
-/*main page header*/
-
-header {
+.navigation {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px dashed orangered;
 }
 
 .navbar {
   display: flex;
-  justify-content: space-evenly;
-  width: 70%;
-
+  justify-content: space-between;
+  width: 100%;
 }
 
 .navbar a {
   color: black;
   text-decoration: none;
-  margin: 0 5%;
+  font-size: 1.6rem;
+  line-height: 1.25;
+  margin: 0 30px;
 }
 
-header img {
-
+.logo {
+  width: 20%;
+  height: auto;
 }
 
-/*main page mobile*/
+/*header mobile*/
 @media(max-width:500px) {
-  header {
+  .navigation {
     flex-direction: column;
   }
 
   .navbar {
     flex-direction: column;
+  }
+
+  .navbar a {
+    text-align: center;
+    margin: 0;
   }
 }
 
@@ -129,16 +152,176 @@ header img {
 .maininfo {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 20px;
+  margin: 20px 0;
+}
+
+.maininfo img {
+  margin-bottom: 10px;
 }
 
 /*left side*/
 .left-side {
   display: flex;
   flex-direction: column;
+  width: 60%;
+  margin-right: 2.5%;
+  padding-right: 20px;
+  border-right: 1px dashed orangered;
 }
 
 .left-side .top {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
+  border-bottom: 1px dashed orangered;
+  padding-bottom: 10px;
+}
+
+.left-side .top h1 {
+  margin-bottom: 10px;
+}
+
+
+.left-side .bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 10px;
+}
+
+.left-side .information {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 45%;
+}
+
+.left-side img {
+  width: auto;
+  height: 250px;
+
+}
+
+/*right side*/
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 35%;
+}
+
+.right-side .citem {
+  display: none;
+  width: auto;
+  height: 250px;
+}
+
+.right-side .active-img {
+  display: block;
+}
+
+/*main content mobile*/
+@media(max-width:500px) {
+  .maininfo {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .left-side {
+    width: 100%;
+    border: none;
+    padding: 0;
+  }
+
+  .left-side .top h1 {
+    margin-bottom: 0;
+  }
+
+  .left-side .bottom {
+    flex-direction: column;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed orangered;
+    padding-bottom: 10px;
+  }
+
+  .left-side .bottom-left {
+    margin-bottom: 10px;
+    border-bottom: 1px dashed orangered;
+    padding-bottom: 10px;
+  }
+
+  .left-side .bottom-right {
+    margin-top: 10px;
+  }
+
+  .left-side .information {
+    width: 100%;
+  }
+  .right-side {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+/*about content*/
+.aboutinfo {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  margin-bottom: 150px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  height: 500px;
+}
+ 
+.tabs h2 {
+  font-size: 2rem;
+  text-decoration-line: line-through;
+  text-decoration-color: aqua;
+  text-align: center;
+}
+
+.card img {
+  height: 450px;
+  width: auto;
+}
+
+.active-tab h2 {
+  text-decoration-line: underline;
+  text-align: right;
+}
+
+.active-tab img {
+  height: 450px;
+  width: auto;
+}
+
+.inactive-tab {
+  display: none;
+}
+
+.pitem {
+  display: none;
+  width: 75%;
+}
+
+.active-page {
+  display: flex;
+}
+
+
+/*mobile about*/
+
+/*footer*/
+footer {
+  text-align: center;
+  border-top: 1px double orangered;
+  margin: 10px 0;
+  padding-top: 20px;
 }
