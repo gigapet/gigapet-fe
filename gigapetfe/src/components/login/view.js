@@ -16,7 +16,7 @@ class View extends React.Component {
             <div>
                 <LogNav/>
                 <Route 
-                    exact path ="/login" 
+                    exact path ="/" 
                     render = {() => (<LoginPage 
                     handleChanges = {this.props.handleChanges} 
                     signIn = {this.props.signIn}

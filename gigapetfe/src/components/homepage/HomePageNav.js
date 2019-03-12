@@ -30,7 +30,7 @@ class HomePageNav extends React.Component {
         event.preventDefault();
         window.localStorage.removeItem('user');
         window.location.reload();
-        History.push('/login');
+        History.push('/');
      }
   
   
@@ -42,8 +42,8 @@ class HomePageNav extends React.Component {
                 <StyledLink to= "/month" component = {Month}> Month </StyledLink>
                 <StyledLink to= "/week" component = {Week}> Week </StyledLink>
                 <StyledLink to= "/day" component = {Day}> Day </StyledLink>
+                <StyledLink to ="#" onClick = {this.clearStorage}> Logout </StyledLink>
             </Nav>
-           <button onClick = {this.clearStorage}> CLEAR </button>
         </div>);
      }
   }

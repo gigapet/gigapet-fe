@@ -1,19 +1,42 @@
-import React from 'react';
+import React from 'react'
+import styled from 'styled-components';
+
+const NumDay = styled.div`
+    display:flex;
+    justify-content:center;
+    width: 100%;
+    height: 9vh;
+    align-items:center;
+    font-size: 2rem;
+    margin: 0 auto;
+   
+    :hover {
+      background: darkgrey;
+      color: black; 
+    }
+`;
 
 class Day extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
+    render() {
+      const {
+        day,
+        day: {
+          date,
+          isCurrentMonth,
+          isToday,
+          number
+        },
+        select,
+        selected
+      } = this.props;
+  
+      return (
+        <NumDay 
+          key={date.toString()} 
+          className={"day" + (isToday ? " today" : "") + (isCurrentMonth ? "" : " different-month") + (date.isSame(selected) ? " selected" : "")} 
+          onClick={()=>select(day)}>{number}</NumDay>
+      );
     }
-    render() { 
-        return ( 
-            <div>
-                <h1>
-                    I am Day.
-                </h1>
-            </div>
-         );
-    }
-}
- 
-export default Day;
+  }
+
+export default Day

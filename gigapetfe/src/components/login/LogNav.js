@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import LoginPage from '../login/LoginPage';
 import SignUp from '../login/SignUp';
 import styled from 'styled-components';
@@ -11,7 +11,7 @@ const Nav = styled.nav`
     border-bottom: 3px solid black;
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(NavLink)`
 font-size: 1.8rem;
 text-decoration: none;
 padding-right: 10rem;
@@ -21,7 +21,7 @@ const LogNav = (props) => {
     return ( 
         <div>
             <Nav>
-                <StyledLink to="/login" component = {LoginPage}> Log In </StyledLink>
+                <StyledLink to="/" component = {LoginPage}> Log In </StyledLink>
                 <StyledLink to="/signup" component = {SignUp}>  Sign Up </StyledLink>
             </Nav>
         </div>

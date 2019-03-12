@@ -6,10 +6,7 @@ import authenticate from './components/login/authentication';
 
 
 class App extends Component {
-  constructor(props){
-    super();
-  }
-
+  
   render() {
     return (
       <div className="App">
