@@ -17,7 +17,7 @@ text-decoration: none;
 padding-right: 10rem;
 `;
 
-const NavBar = (props) => {
+const LogNav = (props) => {
     return ( 
         <div>
             <Nav>
@@ -28,4 +28,4 @@ const NavBar = (props) => {
      );
 }
  
-export default NavBar;
+export default LogNav;

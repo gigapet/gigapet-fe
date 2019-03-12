@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
 
-const LogInPage = styled.div`
+const Wrapper = styled.div`
     display:flex
     flex-direction: column
     align-items: center
@@ -55,42 +55,32 @@ export class LoginPage extends Component {
   constructor(props){
     super(props);
     this.state = ({
-      username:'',
-      password:'',
+        
     });
   }
-    
-  handleChanges = event => {
-      event.preventDefault();
-      this.setState({
-        [event.target.name]:event.target.value
-      })
-  }
+
 
   render() {
     return (
-    <div>
-      <LogInPage>
+      <Wrapper>
         <LogInTitle>Welcome! Please Log In!</LogInTitle>
         <Form type ="submit">
           <LogInInput placeholder = "username..."
           type = "text"
-          value = {this.state.username}
+          value = {this.props.username}
           name = "username"
-          onChange = {this.handleChanges}
+          onChange = {this.props.handleChanges}
           />
 
           <LogInInput placeholder = "password..."
            type = "password"
-           value = {this.state.password}
+           value = {this.props.password}
            name = "password"
-           onChange = {this.handleChanges}
+           onChange = {this.props.handleChanges}
            />
         </Form> 
-        <LogInButton onClick ={this.props.signIn}>Login</LogInButton>
-
-      </LogInPage>
-    </div>
+        <LogInButton primary onClick ={this.props.signIn}>Login</LogInButton>
+      </Wrapper>
     )
   }
 }

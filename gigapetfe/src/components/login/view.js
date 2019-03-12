@@ -2,11 +2,11 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import LoginPage from './LoginPage';
 import SignUp from './SignUp'
-import NavBar from '../navbar/NavBar';
+import LogNav from './LogNav';
 
 class View extends React.Component {
     constructor(props) {
-        super();
+        super(props);
         this.state = {}
     }
 
@@ -14,8 +14,16 @@ class View extends React.Component {
     render() { 
         return (
             <div>
-                <NavBar/>
-                <Route exact path ="/login" component = {LoginPage}/>
+                <LogNav/>
+                <Route 
+                    exact path ="/login" 
+                    render = {() => (<LoginPage 
+                    handleChanges = {this.props.handleChanges} 
+                    signIn = {this.props.signIn}
+                    password = {this.state.password} 
+                    username = {this.state.username} /> )} 
+                    />
+
                 <Route exact path ="/signup" component = {SignUp}/>
             </div>
         );

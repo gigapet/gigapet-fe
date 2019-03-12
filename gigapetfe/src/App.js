@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import View from './components/login/view';
+import View from './components/login/View';
+import HomePageView from './components/homepage/HomePageView';
+import authenticate from './components/login/authentication';
 
 
 class App extends Component {
@@ -11,10 +13,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <View/>
+       <Auth/>
       </div>
     );
   }
 }
+
+const Auth = authenticate(HomePageView)(View);
 
 export default App;

@@ -20,9 +20,10 @@ const authenticate = App => Login =>
         //requires username and password
         signIn = event => {
             event.preventDefault();
-            window.localStorage.setItem('user', this.state.inputText);
+            window.localStorage.setItem('user', this.state.username);
             window.localStorage.setItem('code', this.state.password);
             window.location.reload();
+            History.push('./month');
         }
 
         render(){
