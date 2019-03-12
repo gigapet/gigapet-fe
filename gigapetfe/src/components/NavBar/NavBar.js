@@ -5,7 +5,6 @@ import SignUp from '../login/SignUp';
 import styled from 'styled-components';
 import Home from '../main/Home'
 
-
 const Nav = styled.nav`
     padding: 2rem 0 2rem 0;
     display: flex;
@@ -19,15 +18,16 @@ text-decoration: none;
 padding-right: 10rem;
 `;
 
-const NavBar = () => {
+const NavBar = (props) => {
     return ( 
-    <div>
-        <Nav>
-            <StyledLink to="/login" component = {LoginPage}> Log In </StyledLink>
-            <StyledLink to="/signup" component = {SignUp}>  Sign Up </StyledLink>
-            <StyledLink to="/home" component = {Home}>  Home </StyledLink>
-        </Nav>
-    </div>
+        <div>
+            <Nav>
+                <StyledLink exact to="/" component = {LoginPage}> Log In </StyledLink>
+                <StyledLink to="/signup" component = {SignUp}>  Sign Up </StyledLink>
+                <StyledLink to="/home" component = {Home}>  Home </StyledLink>
+
+            </Nav>
+        </div>
      );
 }
  

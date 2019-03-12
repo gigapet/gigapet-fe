@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const SignupForm = styled.form`
@@ -9,6 +8,15 @@ const SignupForm = styled.form`
     align-items: center;
     background-color: rgb(116, 116, 145);
     height: 100vh;
+`;
+
+const Title = styled.h2`
+    color:white
+    font-size: 3.5rem
+    background-color: rgb(45, 45, 45)
+    width:100%
+    text-align: center
+    padding: 1rem 1rem 0 1rem;
 `;
 
 const Input = styled.input`
@@ -25,10 +33,15 @@ const Input = styled.input`
 const Button = styled.button`
     color: white;
     background: midnightblue;
-    font-size: 1.2rem;
-    padding: 1.5rem 5rem;
-    border-radius: .5rem;
-    margin: .5rem;
+    font-size: 1.8rem;
+    padding: 2rem 8rem;
+    border-radius: 1rem;
+    margin: 1.5rem;
+    transition: 1s ease;
+    :hover{
+        color: teal;
+        transform: scale(1.1, .8)
+    }
 `;
 
 class SignUp extends React.Component {
@@ -54,8 +67,8 @@ class SignUp extends React.Component {
     render() { 
         return (
             <div>
-                <SignupForm>
-                    <h1>Create your account!</h1>
+                <SignupForm type = "submit">
+                    <Title>Create your account!</Title>
                     <Input 
                     placeholder = "firstname..."
                     type = "text"
@@ -76,7 +89,7 @@ class SignUp extends React.Component {
 
                     <Input 
                     placeholder = "email..."
-                    type = "text"
+                    type = "email"
                     value = {this.state.email}
                     name = "email"
                     onChange = {this.handleChanges}
@@ -85,7 +98,7 @@ class SignUp extends React.Component {
 
                     <Input 
                     placeholder = "password..."
-                    type = "text"
+                    type = "password"
                     value = {this.state.password}
                     name = "password"
                     onChange = {this.handleChanges}
@@ -94,14 +107,13 @@ class SignUp extends React.Component {
 
                     <Input 
                     placeholder = "verifypassword..."
-                    type = "text"
+                    type = "password"
                     value = {this.state.verifypassword}
                     name = "verifypassword"
                     onChange = {this.handleChanges}
                     required
                     />
-                    <Button>Submit</Button>
-                    <Link to = "/"><Button> Login </Button></Link>
+                     <Button> Submit </Button>
                 </SignupForm>
             </div>
          );
