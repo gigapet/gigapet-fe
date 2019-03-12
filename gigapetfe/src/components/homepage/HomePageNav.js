@@ -1,9 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Day from './Day';
-import Week from './Week';
+import WeekView from './WeekView';
 import Month from './Month';
+import { LoginPage } from '../login/LoginPage';
+import './index.css';
 
 const Nav = styled.nav`
     padding: 2rem 0 2rem 0;
@@ -12,11 +14,21 @@ const Nav = styled.nav`
     border-bottom: 3px solid black;
 `;
 
+const StyledNavLink = styled(NavLink)`
+    font-size: 1.8rem;
+    text-decoration: none;
+    padding-right: 10rem;
+    color: darkslateblue;
+`;
+
 const StyledLink = styled(Link)`
     font-size: 1.8rem;
     text-decoration: none;
     padding-right: 10rem;
+    color: darkslateblue;
 `;
+
+
 
 class HomePageNav extends React.Component {
 
@@ -26,23 +38,18 @@ class HomePageNav extends React.Component {
      }
   
   
-     clearStorage = event => {
-        event.preventDefault();
-        window.localStorage.removeItem('user');
-        window.location.reload();
-        History.push('/');
-     }
-  
   
      render() { 
         return ( 
         
         <div>
            <Nav>
-                <StyledLink to= "/month" component = {Month}> Month </StyledLink>
-                <StyledLink to= "/week" component = {Week}> Week </StyledLink>
-                <StyledLink to= "/day" component = {Day}> Day </StyledLink>
-                <StyledLink to ="#" onClick = {this.clearStorage}> Logout </StyledLink>
+                <StyledNavLink to= "/month" activeClassName = 'link' component = {Month}> Month </StyledNavLink>
+                <StyledNavLink to= "/week" activeClassName = 'link' component = {WeekView}> Week </StyledNavLink>
+
+                <StyledNavLink to= "/day" activeClassName = 'link' component = {Day}> Day </StyledNavLink>
+                
+                <StyledLink to="/" onClick = {this.props.signOut} component = {LoginPage}> Logout </StyledLink>
             </Nav>
         </div>);
      }

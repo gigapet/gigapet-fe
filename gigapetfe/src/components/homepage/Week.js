@@ -9,22 +9,14 @@ const NumDayWeek = styled.div`
 class Week extends React.Component {
     render() {
       let days = [];
-      let {
-        date,
-      } = this.props;
+      let { date } = this.props;
       
-      const {
-        month,
-        selected,
-        select,
-      } = this.props;
+      const { selected, select } = this.props;
   
-      for (var i = 0; i < 7; i++) {
+      for (let i = 0; i <= 6; i++) {
         let day = {
             name: date.format("dd").substring(0, 1),
             number: date.date(),
-            isCurrentMonth: date.month() === month.month(),
-            isToday: date.isSame(new Date(), "day"),
             date: date
         };
         days.push(
@@ -38,7 +30,7 @@ class Week extends React.Component {
       }
   
       return (
-        <NumDayWeek className="row week" key={days[0]}>
+        <NumDayWeek key={days[0]}>
           {days}
         </NumDayWeek>
       );

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const SignupForm = styled.form`
     padding-top: 5rem;
@@ -45,12 +46,14 @@ const Button = styled.button`
     }
 `;
 
+const url = "https://gigapetserver.herokuapp.com/";
+
 class SignUp extends React.Component {
     constructor(props) {
         super(props);
         this.state = ({
-            firstname: '',
-            lastname: '',
+            fullname: '',
+            username: '',
             email: '',
             password: '',
             verifypassword: ''
@@ -63,6 +66,19 @@ class SignUp extends React.Component {
           [event.target.name]:event.target.value
         })
     }
+
+    // register = event => {
+    //     event.preventDefault();
+    //     axios
+    //         .post(`${url}api/users/register`, {
+    //             fullname: this.state.fullname,
+    //             username: this.state.username,
+    //             email: this.state.email,
+    //             password: this.state.password
+    //         })
+
+    //         .then(res => )
+    // }
   
     
     render() { 
@@ -71,19 +87,19 @@ class SignUp extends React.Component {
                 <SignupForm type = "submit">
                     <Title>Create your account!</Title>
                     <Input 
-                    placeholder = "firstname..."
+                    placeholder = "fullname..."
                     type = "text"
-                    value = {this.state.firstname}
-                    name = "firstname"
+                    value = {this.state.fullname}
+                    name = "fullname"
                     onChange = {this.handleChanges}
                     required
                     />
 
                     <Input 
-                    placeholder = "lastname..."
+                    placeholder = "username..."
                     type = "text"
-                    value = {this.state.lastname}
-                    name = "lastname"
+                    value = {this.state.username}
+                    name = "username"
                     onChange = {this.handleChanges}
                     required
                     />

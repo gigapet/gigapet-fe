@@ -10,6 +10,7 @@ const CalendarGeneral = styled.div`
   color:white;
   height: 100vh;
   padding:1rem;
+  overflow: hidden;
 `;
 
 const MonthLabelContainer = styled.div`
@@ -21,6 +22,7 @@ const MonthLabel = styled.h1`
   font-size: 7rem;
 
 `;
+
 const Arrows = styled.i`
   font-size: 4rem;
   margin: auto 0;
@@ -104,7 +106,7 @@ renderMonthLabel() {
 render() {
   return (
     <CalendarGeneral>
-      <header className="header">
+      <header>
         <MonthLabelContainer>
           <Arrows className="arrow fa fa-angle-left" onClick={this.previous}/>
           <MonthLabel>{this.renderMonthLabel()}</MonthLabel>
