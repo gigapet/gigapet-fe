@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 // import DayView from './DayView';
+import moment from 'moment'
 
 const NumDay = styled(NavLink)`
     display:flex;
@@ -25,9 +26,11 @@ class Day extends React.Component {
 
 
   render() {
+    let check = moment(this.props.day.date._d).format('l');
     const { day: { date, number } } = this.props;
+    
     return (
-      <NumDay to= {`/${date}`} key={date.toString()} >
+      <NumDay to= {`/${check}`} key={date.toString()} >
         {number} 
       </NumDay>
     );
