@@ -19,8 +19,6 @@ class HomePageView extends React.Component {
             <HomePageNav signOut = {this.props.signOut}/>
             <Route exact path = '/month' render = {props => <Month {...props} />} />
             <Route exact path = '/week' component = {WeekView} />
-            <Route exact path = '/day/:id' render ={props => <Day {...props}/>} />
-
          </div>
       )
    }

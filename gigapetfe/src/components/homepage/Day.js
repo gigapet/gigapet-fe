@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+// import DayView from './DayView';
 
-const NumDay = styled.div`
+const NumDay = styled(NavLink)`
     display:flex;
     justify-content:center;
     width: 100%;
@@ -9,7 +11,8 @@ const NumDay = styled.div`
     align-items:center;
     font-size: 2rem;
     margin: 0 auto;
-   
+    text-decoration: none;
+    color: white;
     :hover {
       background: darkgrey;
       color: black; 
@@ -17,20 +20,18 @@ const NumDay = styled.div`
 `;
 
 class Day extends React.Component {
-    render() {
-      const {
-        day: {
-          date,
-          number
-        },
 
-      } = this.props;
-  
-      return (
-        <NumDay 
-          key={date.toString()}> {number}</NumDay>
-      );
-    }
+
+
+
+  render() {
+    const { day: { date, number } } = this.props;
+    return (
+      <NumDay to= {`/${date}`} key={date.toString()} >
+        {number} 
+      </NumDay>
+    );
   }
+}
 
 export default Day
