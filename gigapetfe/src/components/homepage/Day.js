@@ -18,23 +18,12 @@ const NumDay = styled.div`
 
 class Day extends React.Component {
     render() {
-      const {
-        day,
-        day: {
-          date,
-          isCurrentMonth,
-          isToday,
-          number
-        },
-        select,
-        selected
-      } = this.props;
+      const { day: { date, number } } = this.props;
   
       return (
         <NumDay 
           key={date.toString()} 
-          className={"day" + (isToday ? " today" : "") + (isCurrentMonth ? "" : " different-month") + (date.isSame(selected) ? " selected" : "")} 
-          onClick={()=>select(day)}>{number}</NumDay>
+         >{number}</NumDay>
       );
     }
   }

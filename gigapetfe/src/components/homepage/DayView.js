@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-// import Day from './Day';
-
+// import moment from 'moment';
 
 export class DayView extends Component {
+ 
   render() {
-    return (
-        <div>
+    return{
 
-        </div>
-    )
+    }
   }
+
 }
+
 
 export default DayView

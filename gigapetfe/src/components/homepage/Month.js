@@ -32,7 +32,6 @@ export class Month extends Component {
     
     this.state = {
       month: moment(),
-      selected: moment().startOf('day')
     };
 }
 
@@ -58,7 +57,6 @@ next = () => {
 
 select(day) {
   this.setState({
-    selected: day.date,
     month: day.date.clone(),
   });
 }
@@ -70,15 +68,13 @@ renderWeeks() {
   let count = 0;
   let monthIndex = date.month();
 
-  const { selected, month } = this.state;
+  const { month } = this.state;
 
   while (!done) {
     weeks.push(
       <Week key={date} 
         date={date.clone()} 
-        month={month} 
-        select={(day)=>this.select(day)} 
-        selected={selected} />
+        month={month} />
     );
 
     date.add(1, "w");

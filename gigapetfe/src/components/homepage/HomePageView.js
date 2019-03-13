@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import HomePageNav from './HomePageNav';
 import Month from './Month';
 import {WeekView} from './WeekView'
-import {DayView} from './DayView'
+// import {DayView} from './DayView'
 
 
 class HomePageView extends React.Component {
@@ -19,7 +19,7 @@ class HomePageView extends React.Component {
             <HomePageNav/>
             <Route exact path = '/month' component = {Month} />
             <Route exact path = '/week' component = {WeekView} />
-            <Route exact path = '/day' component = {DayView} />
+            {/* <Route exact path = '/day' component = {DayView} /> */}
 
          </div>
       )

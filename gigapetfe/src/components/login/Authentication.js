@@ -1,5 +1,7 @@
 import React from 'react';
+import axios from 'axios';
 
+const url = "https://gigapetserver.herokuapp.com/";
 
 const authenticate = App => Login => 
     class extends React.Component{
@@ -7,7 +9,8 @@ const authenticate = App => Login =>
             super();
             this.state = ({
                 username: '',
-                password: ''
+                password: '',
+                loggedIn: false
             })
         }
 
@@ -19,16 +22,38 @@ const authenticate = App => Login =>
 
         //requires username and password
         signIn = event => {
-            event.preventDefault();
-            window.localStorage.setItem('user', this.state.username);
-            window.localStorage.setItem('code', this.state.password);
-            window.location.reload();
-            History.push('./month');
+            event.persist();
+            console.log(this.state.username)
+            console.log(this.state.password)
+            axios
+                .post(`${url}api/users/login`,{
+                    username: this.state.username,
+                    password: this.state.password
+                })
+
+                .then( res => {
+                    localStorage.setItem("token", res.data.token);
+                    this.setState({
+                        loggedIn: true
+                    });
+                })
+                .catch(err => alert(err));
         }
 
+        signOut = event => {
+            event.preventDefault();
+            window.localStorage.clear();
+            this.setState({
+                loggedIn: false
+            })
+        }
+
+
+
+
         render(){
-            if(localStorage.getItem('user') && localStorage.getItem('code')){
-                return <App/>
+            if(this.state.loggedIn){
+                return <App signOut = {this.signOut}/>
             } else {
                 return <Login 
                 handleChanges = {this.handleChanges}
