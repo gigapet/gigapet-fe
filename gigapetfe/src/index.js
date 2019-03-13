@@ -33,19 +33,19 @@ class Tab {
   };
 
   select() {
-    // Get all of the elements with the tabs-link class
+    // Get all of the tab elements
     const links = document.querySelectorAll('.card');
 
-    // Using a loop or the forEach method remove the 'tabs-link-selected' class from all of the links
+    // Remove the active class from all of the links
     links.forEach(function(tab){
       tab.classList.remove('active-card')
     });
 
-    // Add a class named "tabs-link-selected" to this link
+    // Add a class active to this link
     this.element.classList.add('active-card');
     
     // Call the select method on the item associated with this link
-    this.tabItem.select();
+    this.page.select();
   }
 }
 
@@ -56,15 +56,15 @@ class Page {
   }
 
   select() {
-    // Select all ".tabs-item" elements from the DOM
+    // Select all page elements from the DOM
     const items = document.querySelectorAll('.pitem');
 
-    // Remove the class "tabs-item-selected" from each element
+    // Remove the class active from each element
     items.forEach(function(card){
       card.classList.remove('active-page')
     });
     
-    // Add a class named "tabs-item-selected" to this element
+    // Add a class active to this element
     this.element.classList.add('active-page');
   }
 }
