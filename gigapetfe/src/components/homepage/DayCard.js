@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import moment from 'moment';
 
 const Form = styled.form`
     padding-top: 5rem;
@@ -37,6 +36,21 @@ const P = styled.p`
     padding: 1rem 5rem;
 `;
 
+const Select = styled.select`
+    width: 27.5rem;
+    height: 5.5rem;
+    font-size: 1.8rem;
+    margin: 1rem;
+    border-radius: 1rem;
+    border: 2px solid black;
+    text-align: right;
+
+`;
+
+const Option = styled.option`
+    text-align: center;
+`;
+
 const Button = styled.button`
     color: white;
     background: midnightblue;
@@ -48,7 +62,7 @@ const Button = styled.button`
 
     :hover{
         color: teal;
-        transform: scale(1.1, .8)
+        transform: scale(1.1, .8);
     }
 `;
 
@@ -83,14 +97,15 @@ export default class DayCard extends Component {
   getFood = () => {
 
     const date =  this.props.match.params.date;
-    
+    const userdata = JSON.parse(localStorage.getItem('userdata'));
+    console.log(typeof userdata.userId);
       axios
         .post(`${url}/api/app`, {
-            parentId: 4,
+            parentId: userdata.userId,
             date: date
         },{ 
             headers: {
-            Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6Impha2UiLCJpYXQiOjE1NTI1MDI2MTUsImV4cCI6MTU1MjUzMTQxNX0.GT6vLylWS00vhS7JYmC7Fr61KdlHjhvMUDCe0mfw7MA'
+            Authorization: userdata.token
           }})
 
         .then(res => {
@@ -104,17 +119,6 @@ export default class DayCard extends Component {
         })
   }
     
-//   fetchDate = date => {
-//     axios
-//       .get(`${url}/${date}`)
-//       .then(response => {
-//         this.setState(() => ({ day: response.data }));
-//       })
-//       .catch(error => {
-//         console.error(error);
-//       });
-//   };
-
   handleChanges = event => {
     event.preventDefault();
     this.setState({
@@ -124,13 +128,20 @@ export default class DayCard extends Component {
 
   postEntry = (event) => {
       event.preventDefault();
-
+      const date =  this.props.match.params.date;
+      const userdata = JSON.parse(localStorage.getItem('userdata'));
     axios  
     .post(`${url}/api/app`, {
-        mealtime: this.state.mealtime,
-        serving: this.state.serving,
-        food: this.state.food
-    })
+        fullName: this.state.fullName,
+        mealTime: this.state.mealTime,
+        foodType: this.state.foodType,
+        foodName: this.state.foodName,
+        parentId: userdata.userId,
+        date: date
+    },{ 
+        headers: {
+        Authorization: userdata.token
+      }})
 
     .then(res => {
         console.log('Its working', res);
@@ -142,9 +153,10 @@ export default class DayCard extends Component {
     .catch( error => console.log('OH NO', error));
 
     this.setState({
-        mealtime: '',
-        serving: '',
-        food: '',
+        fullName: '',
+        mealTime: '',
+        foodType: '',
+        foodName: ''
   })
 }
   
@@ -156,27 +168,44 @@ export default class DayCard extends Component {
 
     return (
         <>
-      <Button onClick = {(event, date) => {this.postEntry(event,date)}}> Clicka Me </Button>
       <Form>
+      <Button onClick = {(event, date) => {this.postEntry(event,date)}}> Clicka Me </Button>
           <Input 
-            placeholder = "mealtime..."
+            placeholder = "fullname..."
             type = "text"
-            value = {this.state.mealtime}
-            name = "mealtime"
+            value = {this.state.fullName}
+            name = "fullName"
             onChange = {this.handleChanges}/>
 
-          <Input  
-            placeholder = "serving..."
-            type = "number"
-            value = {this.state.serving}
-            name = "serving"
-            onChange = {this.handleChanges}/>
+            <label>
+                <Select name = "mealTime" value={this.state.mealTime} onChange={this.handleChanges}>
+                    <Option value ="" disabled selected hidden>Select Meal...</Option>
+                    <option value="breakfast">Breakfast</option>
+                    <option value="lunch">Lunch</option>
+                    <option value="dinner">Dinner</option>
+                    <option value="dessert">Dessert</option>
+                </Select>
+            </label>
 
-          <Input 
-           placeholder = "food..."
+            <label>
+                <Select name = "foodType" value = {this.state.foodType} onChange={this.handleChanges}>
+                    <option value="" disabled selected hidden>Select food type...</option>
+                    <option value="fruit">Fruit</option>
+                    <option value="vegetable">Vegetable</option>
+                    <option value="wholeGrain">Whole Grain</option>
+                    <option value="meat">Meat</option>
+                    <option value="dairy">Dairy</option>
+                    <option value="fat">Fat</option>
+                    <option value="oil">Oil</option>
+                    <option value="treats">Treats</option>
+                </Select>
+            </label>
+
+           <Input 
+           placeholder = "foodname..."
            type = "text"
-           value = {this.state.food}
-           name = "food"
+           value = {this.state.foodName}
+           name = "foodName"
            onChange = {this.handleChanges}/>
 
       <Div>
