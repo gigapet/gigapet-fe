@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const SignupForm = styled.form`
     padding-top: 5rem;
@@ -45,71 +46,114 @@ const Button = styled.button`
     }
 `;
 
+const url = "https://gigapetserver.herokuapp.com/";
+
 class SignUp extends React.Component {
     constructor(props) {
         super(props);
-        this.state = ({
-            firstname: '',
-            lastname: '',
+        this.state = {
+            fullname: '',
+            username: '',
             email: '',
             password: '',
             verifypassword: ''
-        })
+        }
     }
 
     handleChanges = event => {
         event.preventDefault();
         this.setState({
-          [event.target.name]:event.target.value
+            [event.target.name]: event.target.value
         })
+    }
+
+    register = event => {
+        event.preventDefault();
+        if(this.state.password === this.state.verifypassword){
+        axios
+            .post(`${url}api/users/register`, {
+                fullname: this.state.fullname,
+                username: this.state.username,
+                email: this.state.email,
+                password: this.state.password
+            })
+
+            .then(res => {
+                console.log('Its working', res)
+            })
+
+            .catch( error => console.log('OH NO', error));
+
+            this.setState({
+                    fullname: '',
+                    username: '',
+                    email: '',
+                    password: '',
+                    verifypassword: ''
+            })} else {
+                alert('Password does not match!')
+                this.setState({
+                    fullname: '',
+                    username: '',
+                    email: '',
+                    password: '',
+                    verifypassword: ''
+            })
+                
+            }
     }
   
     
     render() { 
         return (
             <div>
-                <SignupForm>
+                <SignupForm type = "submit">
                     <Title>Create your account!</Title>
                     <Input 
-                    placeholder = "firstname..."
+                    placeholder = "fullname..."
                     type = "text"
-                    value = {this.state.firstname}
-                    name = "firstname"
+                    value = {this.state.fullname}
+                    name = "fullname"
                     onChange = {this.handleChanges}
+                    required
                     />
 
                     <Input 
-                    placeholder = "lastname..."
+                    placeholder = "username..."
                     type = "text"
-                    value = {this.state.lastname}
-                    name = "lastname"
+                    value = {this.state.username}
+                    name = "username"
                     onChange = {this.handleChanges}
+                    required
                     />
 
                     <Input 
                     placeholder = "email..."
-                    type = "text"
+                    type = "email"
                     value = {this.state.email}
                     name = "email"
                     onChange = {this.handleChanges}
+                    required
                     />
 
                     <Input 
                     placeholder = "password..."
-                    type = "text"
+                    type = "password"
                     value = {this.state.password}
                     name = "password"
                     onChange = {this.handleChanges}
+                    required
                     />
 
                     <Input 
                     placeholder = "verifypassword..."
-                    type = "text"
+                    type = "password"
                     value = {this.state.verifypassword}
                     name = "verifypassword"
                     onChange = {this.handleChanges}
+                    required
                     />
-                    <Button>Submit</Button>
+                     <Button onClick = {this.register}> Submit </Button>
                 </SignupForm>
             </div>
          );

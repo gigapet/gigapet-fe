@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
-import LoginPage from './components/login/LoginPage'
-import { Route } from 'react-router-dom';
-import SignUp from './components/login/SignUp';
-import NavBar from './components/NavBar/NavBar';
+import View from './components/login/View';
+import HomePageView from './components/homepage/HomePageView';
+import authenticate from './components/login/authentication';
+
 
 class App extends Component {
+  
   render() {
     return (
       <div className="App">
-        <NavBar/>
-        <Route exact path = "/login" component = {LoginPage}/>
-        <Route exact path = "/signup" component={SignUp}/>
+       <Auth/>
       </div>
     );
   }
 }
+
+const Auth = authenticate(HomePageView)(View);
 
 export default App;
