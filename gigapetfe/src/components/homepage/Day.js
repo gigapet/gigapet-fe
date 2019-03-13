@@ -26,7 +26,7 @@ class Day extends React.Component {
 
 
   render() {
-    let check = moment(this.props.day.date._d).format('l');
+    let check = moment(this.props.day.date._d).format('MM-DD-YYYY');
     const { day: { date, number } } = this.props;
     
     return (
