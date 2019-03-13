@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import styled from 'styled-components';
-import DayView from './DayView';
 import WeekView from './WeekView';
 import Month from './Month';
 
@@ -39,8 +38,6 @@ class HomePageNav extends React.Component {
         window.location.reload();
         History.push('/');
      }
-  
-  
      render() { 
         return ( 
         
@@ -48,7 +45,6 @@ class HomePageNav extends React.Component {
            <Nav>
                 <StyledNavLink to= "/month" component = {Month}            > Month  </StyledNavLink>
                 <StyledNavLink to= "/week"  component = {WeekView}         > Week   </StyledNavLink>
-                <StyledNavLink to= "/day"   component = {DayView}          > Day    </StyledNavLink>
                 <StyledLink    to ="/"      onClick   = {this.clearStorage}> Logout </StyledLink>
             </Nav>
         </div>);

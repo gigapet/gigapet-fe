@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 const NumDay = styled.div`
     display:flex;
@@ -17,15 +18,18 @@ const NumDay = styled.div`
 `;
 
 class Day extends React.Component {
-    render() {
-      const { day: { date, number } } = this.props;
-  
-      return (
-        <NumDay key={date.toString()}>
-         {number}
-        </NumDay>
-      );
-    }
+
+
+
+
+  render() {
+    const { day: { date, number } } = this.props;
+    return (
+      <NumDay key={date.toString()} onClick={()=>{}}>
+        <NavLink to= {`/month/${date}`}> {number} </NavLink>
+      </NumDay>
+    );
   }
+}
 
 export default Day
