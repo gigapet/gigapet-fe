@@ -9,6 +9,7 @@ const Nav = styled.nav`
     display: flex;
     justify-content: flex-end;
     border-bottom: 3px solid black;
+    background: white;
 `;
 
 const StyledLink = styled(NavLink)`
