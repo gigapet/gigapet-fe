@@ -59,18 +59,6 @@ class SignUp extends React.Component {
         }
     }
 
-    // handleChanges = event => {
-    //     event.persist();
-    //       this.setState(prevState => {
-    //         return {
-            
-    //             ...prevState,
-    //             [event.target.name]: event.target.value 
-              
-    //         }
-    //       })
-    //   };
-
     handleChanges = event => {
         event.preventDefault();
         this.setState({

@@ -63,7 +63,7 @@ export class LoginPage extends Component {
     return (
       <Wrapper>
         <LogInTitle>Welcome! Please Log In!</LogInTitle>
-        <Form type ="submit">
+        <Form type = "submit">
           <LogInInput placeholder = "username..."
           type = "text"
           value = {this.props.username}
@@ -78,7 +78,7 @@ export class LoginPage extends Component {
            onChange = {this.props.handleChanges}
            />
         </Form> 
-        <LogInButton primary onClick ={this.props.signIn}>Login</LogInButton>
+        <LogInButton onClick = {this.props.signIn}>Login</LogInButton>
       </Wrapper>
     )
   }

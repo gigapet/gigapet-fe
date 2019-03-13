@@ -24,6 +24,7 @@ export class WeekView extends Component {
         super(props);
         this.state = {
           week: moment(),
+          selected: moment().startOf('day')
         }
     }
 
@@ -48,7 +49,7 @@ export class WeekView extends Component {
       return <span className="week-label">{week.startOf('week').format("MMMM Do")} - {week.endOf('week').format("MMMM Do YYYY")}</span>;
     }
   render() {
-    const { week } = this.state;
+    const { selected, week } = this.state;
     let date = this.state.week.clone().startOf("week").add("d" -1).day("Sunday");
     
     return (
@@ -61,7 +62,8 @@ export class WeekView extends Component {
         <DayNames />
         <Week key={date} 
         date={date.clone()} 
-        week={week} />
+        week={week} 
+        selected={selected}/>
       </div>
     )
   }

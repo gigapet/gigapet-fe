@@ -10,6 +10,7 @@ const CalendarGeneral = styled.div`
   color:white;
   height: 100vh;
   padding:1rem;
+  overflow: hidden;
 `;
 
 const MonthLabelContainer = styled.div`
@@ -20,6 +21,7 @@ const MonthLabel = styled.h1`
   margin: 0 auto 2rem;
   font-size: 7rem;
 `;
+
 const Arrows = styled.i`
   font-size: 4rem;
   margin: auto 0;
@@ -32,6 +34,7 @@ export class Month extends Component {
     
     this.state = {
       month: moment(),
+      selected: moment().startOf('day')
     };
 }
 
@@ -57,6 +60,7 @@ next = () => {
 
 select(day) {
   this.setState({
+    selected: day.date,
     month: day.date.clone(),
   });
 }
@@ -68,13 +72,18 @@ renderWeeks() {
   let count = 0;
   let monthIndex = date.month();
 
-  const { month } = this.state;
+  const {
+    selected,
+    month,
+  } = this.state;
 
   while (!done) {
     weeks.push(
       <Week key={date} 
         date={date.clone()} 
-        month={month} />
+        month={month} 
+        select={(day)=>this.select(day)} 
+        selected={selected} />
     );
 
     date.add(1, "w");
@@ -87,8 +96,10 @@ renderWeeks() {
 };
 
 renderMonthLabel() {
-  const { month } = this.state;
-
+  const {
+    month,
+  } = this.state;
+  
   return <span className="month-label">{month.format("MMMM YYYY")}</span>;
 }
 render() {
