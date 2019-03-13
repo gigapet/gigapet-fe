@@ -21,9 +21,9 @@ class Day extends React.Component {
       const { day: { date, number } } = this.props;
   
       return (
-        <NumDay 
-          key={date.toString()} 
-         >{number}</NumDay>
+        <NumDay key={date.toString()}>
+         {number}
+        </NumDay>
       );
     }
   }

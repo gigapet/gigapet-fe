@@ -18,7 +18,7 @@ class Week extends React.Component {
             date: date
         };
         days.push(
-          <Day day={day} />
+          day
         );
   
         date = date.clone();
@@ -26,8 +26,10 @@ class Week extends React.Component {
       }
   
       return (
-        <NumDayWeek key={days[0]}>
-          {days}
+        <NumDayWeek> 
+        {days.map(day =>(  
+          <Day day={day} key={day[0]}/>
+        ))}
         </NumDayWeek>
       );
     }

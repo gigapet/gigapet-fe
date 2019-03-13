@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+// import axios from 'axios';
 
 const SignupForm = styled.form`
     padding-top: 5rem;
@@ -45,7 +45,7 @@ const Button = styled.button`
     }
 `;
 
-const url = "https://gigapetserver.herokuapp.com/";
+// const url = "https://gigapetserver.herokuapp.com/";
 
 class SignUp extends React.Component {
     constructor(props) {
