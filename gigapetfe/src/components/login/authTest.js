@@ -5,7 +5,7 @@ import { Redirect, Route } from 'react-router-dom';
 
 
 
-const AuthTest = ({ component: Component, ...rest }) => {
+const privateRoute = ({ component: Component, ...rest }) => {
 
     return (
         <Route {...rest} 
@@ -15,5 +15,5 @@ const AuthTest = ({ component: Component, ...rest }) => {
 
 }
 
-export default AuthTest;
+export default privateRoute;
 

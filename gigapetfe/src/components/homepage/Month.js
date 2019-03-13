@@ -100,7 +100,7 @@ renderMonthLabel() {
   const {
     month,
   } = this.state;
-
+  
   return <span className="month-label">{month.format("MMMM YYYY")}</span>;
 }
 render() {

@@ -51,34 +51,69 @@ const url = "https://gigapetserver.herokuapp.com/";
 class SignUp extends React.Component {
     constructor(props) {
         super(props);
-        this.state = ({
+        this.state = {
             fullname: '',
             username: '',
             email: '',
             password: '',
             verifypassword: ''
-        })
+        }
     }
+
+    // handleChanges = event => {
+    //     event.persist();
+    //       this.setState(prevState => {
+    //         return {
+            
+    //             ...prevState,
+    //             [event.target.name]: event.target.value 
+              
+    //         }
+    //       })
+    //   };
 
     handleChanges = event => {
         event.preventDefault();
         this.setState({
-          [event.target.name]:event.target.value
+            [event.target.name]: event.target.value
         })
     }
 
-    // register = event => {
-    //     event.preventDefault();
-    //     axios
-    //         .post(`${url}api/users/register`, {
-    //             fullname: this.state.fullname,
-    //             username: this.state.username,
-    //             email: this.state.email,
-    //             password: this.state.password
-    //         })
+    register = event => {
+        event.preventDefault();
+        if(this.state.password === this.state.verifypassword){
+        axios
+            .post(`${url}api/users/register`, {
+                fullname: this.state.fullname,
+                username: this.state.username,
+                email: this.state.email,
+                password: this.state.password
+            })
 
-    //         .then(res => )
-    // }
+            .then(res => {
+                console.log('Its working', res)
+            })
+
+            .catch( error => console.log('OH NO', error));
+
+            this.setState({
+                    fullname: '',
+                    username: '',
+                    email: '',
+                    password: '',
+                    verifypassword: ''
+            })} else {
+                alert('Password does not match!')
+                this.setState({
+                    fullname: '',
+                    username: '',
+                    email: '',
+                    password: '',
+                    verifypassword: ''
+            })
+                
+            }
+    }
   
     
     render() { 
@@ -130,7 +165,7 @@ class SignUp extends React.Component {
                     onChange = {this.handleChanges}
                     required
                     />
-                     <Button> Submit </Button>
+                     <Button onClick = {this.register}> Submit </Button>
                 </SignupForm>
             </div>
          );

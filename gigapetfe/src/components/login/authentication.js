@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 const url = "https://gigapetserver.herokuapp.com/";
 
@@ -10,7 +11,7 @@ const authenticate = App => Login =>
             this.state = ({
                 username: '',
                 password: '',
-                loggedIn: false
+                loggedIn: true
             })
         }
 
@@ -23,8 +24,6 @@ const authenticate = App => Login =>
         //requires username and password
         signIn = event => {
             event.persist();
-            console.log(this.state.username)
-            console.log(this.state.password)
             axios
                 .post(`${url}api/users/login`,{
                     username: this.state.username,
@@ -38,7 +37,7 @@ const authenticate = App => Login =>
                     });
                 })
                 .catch(err => alert(err));
-        }
+            }
 
         signOut = event => {
             event.preventDefault();

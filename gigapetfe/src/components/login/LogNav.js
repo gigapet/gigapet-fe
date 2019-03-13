@@ -21,7 +21,7 @@ const LogNav = (props) => {
     return ( 
         <div>
             <Nav>
-                <StyledLink to="/" component = {LoginPage}> Log In </StyledLink>
+                <StyledLink to="/login" component = {LoginPage}> Log In </StyledLink>
                 <StyledLink to="/signup" component = {SignUp}>  Sign Up </StyledLink>
             </Nav>
         </div>

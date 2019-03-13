@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import LoginPage from './LoginPage';
 import SignUp from './SignUp'
 import LogNav from './LogNav';
@@ -15,16 +15,18 @@ class View extends React.Component {
         return (
             <div>
                 <LogNav/>
-                <Route 
-                    exact path ="/" 
-                    render = {() => (<LoginPage 
+                <Switch>
+                    <Route 
+                    exact path ="/login" 
+                    render = {(...props) => (<LoginPage 
                     handleChanges = {this.props.handleChanges} 
                     signIn = {this.props.signIn}
                     password = {this.state.password} 
-                    username = {this.state.username} /> )} 
+                    username = {this.state.username}
+                    {...props} /> )} 
                     />
-
-                <Route exact path ="/signup" component = {SignUp}/>
+                    <Route exact path ="/signup" component = {SignUp}/>
+                </Switch>
             </div>
         );
     }
