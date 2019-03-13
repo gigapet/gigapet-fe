@@ -6,7 +6,8 @@ class DayView extends Component {
   render() {
     return (
       <div>
-        
+        <h2>Chosen Date</h2>  
+        <p>Enter food below</p>
       </div>
     );
   }

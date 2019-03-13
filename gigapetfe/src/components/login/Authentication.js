@@ -10,7 +10,7 @@ const authenticate = App => Login =>
             this.state = ({
                 username: '',
                 password: '',
-                loggedIn: false
+                loggedIn: true
             })
         }
 
@@ -55,13 +55,12 @@ const authenticate = App => Login =>
             if(this.state.loggedIn){
                 return <App signOut = {this.signOut}/>
             } else {
-                return <App signOut = {this.signOut}/>
-                // return <Login 
-                // handleChanges = {this.handleChanges}
-                // signIn = {this.signIn}
-                // username = {this.state.username}
-                // password = {this.state.password}
-                // />
+                return <Login 
+                handleChanges = {this.handleChanges}
+                signIn = {this.signIn}
+                username = {this.state.username}
+                password = {this.state.password}
+                />
             }
         }
     }
