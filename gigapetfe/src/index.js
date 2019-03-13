@@ -1,15 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import './index.css';
+// import App from './App';
+// import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// ReactDOM.render(<App />, document.getElementById('root'));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// // If you want your app to work offline and load faster, you can change
+// // unregister() to register() below. Note this comes with some pitfalls.
+// // Learn more about service workers: https://bit.ly/CRA-PWA
+// serviceWorker.unregister();
 
 
 //event listeners for about and home page
@@ -20,6 +20,7 @@ class Tab {
     
     // Get the custom data attribute on the Link
     this.data = this.element.dataset.tab
+    console.log(this.data)
     
     // Get the associated page element
     this.itemElement = document.querySelector(`.page[data-tab='${this.element.dataset.tab}']`);
@@ -34,18 +35,40 @@ class Tab {
 
   select() {
     // Get all of the tab elements
-    const links = document.querySelectorAll('.card');
+    const links = document.querySelectorAll('.titem');
+  console.log(links)
+    //create the deciding if statement
+    if (this.element.classList.contains('active-tab')) {
+      //remove inactive from all
+      links.forEach(function(tab){
+        tab.classList.remove('inactive-tab')
+      });
+      //remove active from current item
+      this.element.classList.remove('active-tab');
 
-    // Remove the active class from all of the links
-    links.forEach(function(tab){
-      tab.classList.remove('active-card')
-    });
+      // Call the select method on the item associated with this link
+      this.page.select();
+    }
+    else {
+      // Remove the active class from all of the links
+      links.forEach(function(tab){
+        tab.classList.remove('active-tab')
+      });
 
-    // Add a class active to this link
-    this.element.classList.add('active-card');
-    
-    // Call the select method on the item associated with this link
-    this.page.select();
+      //add inactive to all
+      links.forEach(function(tab){
+        tab.classList.add('inactive-tab')
+      });
+
+      // Add a class active to this link
+      this.element.classList.add('active-tab');
+      
+      //remove inactive
+      this.element.classList.remove('inactive-tab');
+
+      // Call the select method on the item associated with this link
+      this.page.select();
+    }    
   }
 }
 
@@ -69,6 +92,64 @@ class Page {
   }
 }
 
-let links = document.querySelectorAll('.card').forEach(function(section) {
-  return new Tab(section);
+let links = document.querySelectorAll('.titem')
+// links.forEach(function(section) {
+//   return new Tab(section);
+// });
+console.log(links)
+
+
+
+class Carousel {
+  constructor(carousel) {
+      this.carousel = carousel;
+      this.leftButton = carousel.querySelector('.left-button');
+      this.rightButton = carousel.querySelector('.right-button');
+      this.carouselItems = carousel.querySelectorAll('.card');
+      this.carouselItems[0].style.display = 'block';
+      this.currentItem = 0;
+      this.timer = null;
+
+
+      this.leftButton.addEventListener('click', _ => this.changeItem(false));
+      this.rightButton.addEventListener('click', _ => this.changeItem(true));
+
+      this.resetTimer();
+  }
+
+  changeItem(goRight) {
+
+      this.carouselItems[this.currentItem].style.display = 'none';
+
+      if(goRight) {
+          if(this.currentItem + 1 > this.carouselItems.length - 1) {
+              this.currentItem = 0;
+          } else {
+              this.currentItem++;
+          }
+      } else {
+          if(this.currentItem - 1 < 0) {
+              this.currentItem = this.carouselItems.length - 1;
+          } else {
+              this.currentItem--;
+          }
+      }
+
+      this.carouselItems[this.currentItem].style.display = 'block';
+
+      //Reset Timer
+      this.resetTimer();
+  }
+
+  resetTimer() {
+      clearInterval(this.timer);  
+
+      this.timer = setInterval(() => {
+          this.changeItem(true);
+      }, 3000);
+  }
+}
+
+document.querySelectorAll('.features').forEach(function(carousel){
+  return new Carousel(carousel);
 });
