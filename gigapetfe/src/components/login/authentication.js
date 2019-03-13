@@ -31,7 +31,7 @@ const authenticate = App => Login =>
                 })
 
                 .then( res => {
-                    localStorage.setItem("token", res.data.token);
+                    localStorage.setItem("userdata", JSON.stringify(res.data));
                     this.setState({
                         loggedIn: true
                     });

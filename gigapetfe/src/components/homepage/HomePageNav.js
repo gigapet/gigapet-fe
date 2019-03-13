@@ -45,10 +45,8 @@ class HomePageNav extends React.Component {
         <div>
            <Nav>
                 <StyledNavLink to= "/month" activeClassName = 'link' component = {Month}> Month </StyledNavLink>
-                <StyledNavLink to= "/week" activeClassName = 'link' component = {WeekView}> Week </StyledNavLink>
-
-                <StyledNavLink to= "/day" activeClassName = 'link' component = {Day}> Day </StyledNavLink>
-                
+                <StyledNavLink to= "/month/week" activeClassName = 'link' component = {WeekView}> Week </StyledNavLink>
+                <StyledNavLink to= "/month/week/day" activeClassName = 'link' component = {Day}> Day </StyledNavLink>
                 <StyledLink to="/" onClick = {this.props.signOut} component = {LoginPage}> Logout </StyledLink>
             </Nav>
         </div>);

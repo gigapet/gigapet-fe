@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import HomePageNav from './HomePageNav';
 import Month from './Month';
 import WeekView from './WeekView';
-import Day from './Day';
+import DayCard from './DayCard';
 
 
 class HomePageView extends React.Component {
@@ -18,7 +18,8 @@ class HomePageView extends React.Component {
          <div>
             <HomePageNav signOut = {this.props.signOut}/>
             <Route exact path = '/month' render = {props => <Month {...props} />} />
-            <Route exact path = '/week' component = {WeekView} />
+            <Route exact path = '/month/week' component = {WeekView} />
+            <Route exact path = '/month/week/:date' component = {DayCard} />
          </div>
       )
    }
