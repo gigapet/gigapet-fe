@@ -5,7 +5,6 @@ import Month from './Month';
 import WeekView from './WeekView';
 import Day from './Day';
 
-
 class HomePageView extends React.Component {
    constructor(props) {
       super(props);
