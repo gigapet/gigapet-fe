@@ -6,7 +6,6 @@ import Week from './Week';
 import styled from 'styled-components';
 
 const CalendarGeneral = styled.div`
-  background: midnightblue;
   color:white;
   height: 100vh;
   padding:1rem;
@@ -35,7 +34,6 @@ export class Month extends Component {
     
     this.state = {
       month: moment(),
-      selected: moment().startOf('day')
     };
 }
 
@@ -59,12 +57,6 @@ next = () => {
   });
 }
 
-select(day) {
-  this.setState({
-    selected: day.date,
-    month: day.date.clone(),
-  });
-}
 
 renderWeeks() {
   let weeks = [];
@@ -74,7 +66,6 @@ renderWeeks() {
   let monthIndex = date.month();
 
   const {
-    selected,
     month,
   } = this.state;
 
@@ -83,8 +74,7 @@ renderWeeks() {
       <Week key={date} 
         date={date.clone()} 
         month={month} 
-        select={(day)=>this.select(day)} 
-        selected={selected} />
+       />
     );
 
     date.add(1, "w");

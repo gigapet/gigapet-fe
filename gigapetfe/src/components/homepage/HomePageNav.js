@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import {  Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Day from './Day';
 import WeekView from './WeekView';
@@ -14,20 +14,21 @@ const Nav = styled.nav`
     justify-content: flex-end;
     border-bottom: 3px solid black;
     background: white;
+    min-width: 100%;
 `;
 
-const StyledNavLink = styled(NavLink)`
+const StyledNavLink = styled(Link)`
     font-size: 1.8rem;
     text-decoration: none;
-    padding-right: 10rem;
     color: darkslateblue;
+    padding-right: 5rem;
 `;
 
 const StyledLink = styled(Link)`
     font-size: 1.8rem;
     text-decoration: none;
-    padding-right: 10rem;
     color: darkslateblue;
+    padding-right: 5rem;
 `;
 
 
@@ -45,9 +46,9 @@ class HomePageNav extends React.Component {
         
         <div>
            <Nav>
-                <StyledNavLink to= "/month" activeClassName = 'link' component = {Month}> Month </StyledNavLink>
-                <StyledNavLink to= "/month/week" activeClassName = 'link' component = {WeekView}> Week </StyledNavLink>
-                <StyledNavLink to= {`/month/week/${moment().format('MM_DD_YYYY')}`} activeClassName = 'link' component = {Day}> Day </StyledNavLink>
+                <StyledNavLink to= "/month"  component = {Month}> Month </StyledNavLink>
+                <StyledNavLink to= "/month/week"  component = {WeekView}> Week </StyledNavLink>
+                <StyledNavLink to= {`/month/week/${moment().format('MM_DD_YYYY')}`} component = {Day}> Day </StyledNavLink>
                 <StyledLink to="/" onClick = {this.props.signOut} component = {LoginPage}> Logout </StyledLink>
             </Nav>
         </div>);
