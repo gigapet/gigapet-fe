@@ -252,26 +252,30 @@ export default class DayCard extends Component {
   };
 
   deleteFoodEntry = (event, entry) => {
-    const userdata = JSON.parse(localStorage.getItem('userdata'));
+    event.preventDefault();
+        const userdata = JSON.parse(localStorage.getItem('userdata'));
+        const date =  this.props.match.params.date;
+        console.log('function running', entry)
     axios
     .delete(`${url}/api/app/deletefood`, {
-      id: entry
+       id: entry,
+       parentId: userdata.userId,
+       date: date
       },
-      {
-        headers: {
-        Authorization: userdata.token
-        }
+      { 
+        // headers: {
+        // Authorization: userdata.token
+        // }
       }
     )
-
     .then(res => {
         console.log(res.data);
         this.setState({
           entry: res.data
     })})
-
-    .catch( error => console.log('OH NO', error));
-}
+  
+    .catch( error => console.log('OHHHH NOOOOO', error));
+  }
 
   render() {
     if (!this.state.day) {
@@ -282,13 +286,14 @@ export default class DayCard extends Component {
       <Wrapper>
         <MealWrapper>
           <Div>
-            {this.state.entry.map((ent,index) => {
+            {this.state.entry.map((ent) => {
               return (
-                <Box key={index}>
+                <Box key={ent.id}>
                   <P>{ent.fullName} </P>
-                  <P>{ent.mealTime} </P>
-                  <P>{ent.foodName} </P>
-                  <button onClick={(event) => (this.deleteFoodEntry(event, ent.id))}>Delete</button>
+                  <P>Meal: {ent.mealTime} </P>
+                  <P>Type: {ent.foodType} </P>
+                  <P>Food: {ent.foodName} </P>
+                  <button onClick={(event) => {this.deleteFoodEntry(event, ent.id)}}>Delete</button>
                 </Box>
               );
             })}
