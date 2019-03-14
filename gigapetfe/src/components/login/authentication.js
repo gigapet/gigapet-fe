@@ -10,8 +10,18 @@ const authenticate = App => Login =>
             this.state = ({
                 username: '',
                 password: '',
-                loggedIn: true
+                loggedIn: false
             })
+        }
+        
+        componentDidMount(){
+            
+            if(localStorage.getItem('userdata')){
+                const userdata = JSON.parse(localStorage.getItem('userdata'));
+                axios.post(`${url}api/users/checkauth`, {token: userdata.token}).then(res => {
+                    res.data ? this.setState({ loggedIn: true}) : localStorage.clear();
+                }).catch(error => console.log(error));
+            }
         }
 
         handleChanges = event => {
@@ -30,14 +40,16 @@ const authenticate = App => Login =>
                 })
 
                 .then( res => {
-                    localStorage.setItem("token", res.data.token);
+                    localStorage.setItem("userdata", JSON.stringify(res.data));
                     this.setState({
                         loggedIn: true
                     });
-                    this.props.history.push('/month')
+                       this.props.history.push('/info');
                 })
                 .catch(err => alert(err));
             }
+
+        
 
         signOut = event => {
             event.preventDefault();
@@ -45,7 +57,8 @@ const authenticate = App => Login =>
             this.setState({
                 loggedIn: false
             })
-            this.props.history.push('/login')
+            this.props.history.push('/login');
+
         }
 
 
@@ -53,7 +66,9 @@ const authenticate = App => Login =>
 
         render(){
             if(this.state.loggedIn){
-                return <App signOut = {this.signOut}/>
+                return <App signOut = {this.signOut}
+                loggedIn = {this.state.loggedIn}
+                />
             } else {
                 return <Login 
                 handleChanges = {this.handleChanges}

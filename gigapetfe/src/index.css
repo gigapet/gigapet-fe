@@ -32,9 +32,99 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: gray;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+ ::-webkit-scrollbar {
+  width: 0px; 
+  }
+
+.fa-trash-alt {
+  font-size: 2rem;
+  transition: 500ms ease;
+}
+
+.fa-trash-alt:hover{
+  color: red;
+}
+
+.fa-backspace {
+  font-size: 2.5rem;
+  transition: 500ms ease;
+  animation: itsAlive 3s linear infinite;
+}
+
+.fa-backspace:hover{
+  color: red;
+}
+
+.box {
+  animation: disco 1s linear infinite;
+}
+
+
+
+@keyframes disco{
+  0% {
+  transform: scale(1, 1);
+  
+}
+
+25% {
+  transform: scale(1.2, .85);
+  background: rgb(83, 8, 8);
+  
+}
+
+  50% {
+  transform: scale(.85, 1.2);
+  background: rgb(16, 48, 16);
+    
+  } 
+
+75% {
+  transform: scale(1.2, .85);
+  background: rgb(43, 43, 78);
+
+}
+
+  100% {
+  transform: scale(1, 1) rotate(0);
+  background: rgb(43, 16, 20);
+      
+  } 
+}
+
+
+@keyframes itsAlive {
+  0% {
+  transform: scale(1, 1);
+  
+}
+
+25% {
+  transform: scale(.9, .9) rotate(15deg);
+  
+}
+
+  50% {
+  transform: scale(1.1, 1.1) rotate(0);
+    
+  } 
+
+75% {
+  transform: scale(.9, .9) rotate(-15deg);
+
+}
+  100% {
+  transform: scale(1, 1) rotate(15);
+      
+  } 
+}
+/* )
+animation: itsAlive 5s linear infinite; */

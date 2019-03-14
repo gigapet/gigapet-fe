@@ -1,31 +1,59 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import {  Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Day from './Day';
 import WeekView from './WeekView';
 import Month from './Month';
 import { LoginPage } from '../login/LoginPage';
-import './index.css';
+import moment from 'moment';
+import Info from './Info';
 
 const Nav = styled.nav`
     padding: 2rem 0 2rem 0;
     display: flex;
     justify-content: flex-end;
     border-bottom: 3px solid black;
+    background: white;
+    min-width: 100%;
+
+    @media (max-width: 50rem){
+        flex-direction: column;
+        padding: 0;
+    }
 `;
 
-const StyledNavLink = styled(NavLink)`
-    font-size: 1.8rem;
+const StyledNavLink = styled(Link)`
+    font-size: 2rem;
     text-decoration: none;
-    padding-right: 10rem;
     color: darkslateblue;
+    padding-right: 5rem;
+    transition: 500ms ease;
+
+    :hover {
+        transform: scale(1.02, 1.02)
+        
+    }
+
+    @media (max-width: 50rem){
+        flex-direction: column;
+        padding: 0;
+    }
 `;
 
 const StyledLink = styled(Link)`
-    font-size: 1.8rem;
+    font-size: 2rem;
     text-decoration: none;
-    padding-right: 10rem;
     color: darkslateblue;
+    padding-right: 5rem;
+    transition: 500ms ease;
+
+    :hover {
+        transform: scale(1.03, 1.03)
+    }
+
+    @media (max-width: 50rem){
+        padding: 0;
+    }
 `;
 
 
@@ -37,18 +65,16 @@ class HomePageNav extends React.Component {
         this.state = {  }
      }
   
-  
-  
+
      render() { 
         return ( 
         
         <div>
            <Nav>
-                <StyledNavLink to= "/month" activeClassName = 'link' component = {Month}> Month </StyledNavLink>
-                <StyledNavLink to= "/week" activeClassName = 'link' component = {WeekView}> Week </StyledNavLink>
-
-                <StyledNavLink to= "/day" activeClassName = 'link' component = {Day}> Day </StyledNavLink>
-                
+                <StyledNavLink to= "/info" component = {Info}> Home </StyledNavLink>
+                <StyledNavLink to= "/month"  component = {Month}> Month </StyledNavLink>
+                <StyledNavLink to= "/month/week"  component = {WeekView}> Week </StyledNavLink>
+                <StyledNavLink to= {`/month/week/${moment().format('MM_DD_YYYY')}`} component = {Day}> Day </StyledNavLink>
                 <StyledLink to="/" onClick = {this.props.signOut} component = {LoginPage}> Logout </StyledLink>
             </Nav>
         </div>);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import LoginPage from '../login/LoginPage';
 import SignUp from '../login/SignUp';
 import styled from 'styled-components';
@@ -9,9 +9,10 @@ const Nav = styled.nav`
     display: flex;
     justify-content: flex-end;
     border-bottom: 3px solid black;
+    background: white;
 `;
 
-const StyledLink = styled(NavLink)`
+const StyledLink = styled(Link)`
 font-size: 1.8rem;
 text-decoration: none;
 padding-right: 10rem;
