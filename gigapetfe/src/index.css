@@ -216,18 +216,14 @@ img {
   width: 35%;
 }
 
-.carousel {
-  position: relative;
-  widows: 100%;
-  opacity: 1;
-  z-index: 1;
-  transition: opacity 1s;
-}
-
 .right-side .citem {
   display: none;
   width: auto;
   height: 250px;
+  position: relative;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 1s;
 }
 
 .right-side .active-img {
@@ -344,6 +340,10 @@ img {
 .active-tab {
   width: 100%;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-items: flex-end;
+  align-items: flex-end;
 }
 
 .active-tab h2 {
@@ -353,7 +353,7 @@ img {
 
 .active-tab img {
   height: 400px;
-  width: 1000px;
+  width: 420px;
   filter: none;
   transform: none;
 }
@@ -388,7 +388,7 @@ img {
   }
 
   .active-tab img {
-    width: 1000px;
+    width: 420px;
     height: 400px;
   }
 
