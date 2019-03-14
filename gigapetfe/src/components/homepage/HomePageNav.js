@@ -7,25 +7,26 @@ import Month from './Month';
 import { LoginPage } from '../login/LoginPage';
 import './HomePageNav';
 import moment from 'moment';
+import Info from './Info';
+
 
 const Nav = styled.nav`
     padding: 2rem 0 2rem 0;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-evenly;
     border-bottom: 3px solid black;
+    margin:0;
 `;
 
 const StyledNavLink = styled(NavLink)`
     font-size: 1.8rem;
     text-decoration: none;
-    padding-right: 10rem;
     color: darkslateblue;
 `;
 
 const StyledLink = styled(Link)`
     font-size: 1.8rem;
     text-decoration: none;
-    padding-right: 10rem;
     color: darkslateblue;
 `;
 
@@ -37,6 +38,7 @@ class HomePageNav extends React.Component {
         
         <div>
            <Nav>
+                <StyledNavLink to= "/info" activeClassName = 'link' component = {Info}> Home </StyledNavLink>
                 <StyledNavLink to= "/month" activeClassName = 'link' component = {Month}> Month </StyledNavLink>
                 <StyledNavLink to= "/month/week" activeClassName = 'link' component = {WeekView}> Week </StyledNavLink>
                 <StyledNavLink to= {`/month/week/${moment().format('MM_DD_YYYY')}`} activeClassName = 'link' component = {Day}> Day </StyledNavLink>
