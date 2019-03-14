@@ -38,6 +38,18 @@ const MonthLabel = styled.h1`
 const Label = styled.label`
     display:flex;
 `;
+const Servings = styled.div`
+  display:flex;
+  flex-wrap: wrap;
+
+`;
+const Item = styled.p`
+  font-size:1.8rem;
+  width:31%;
+  text-align:left;
+  padding:1rem;
+  color:black;
+`;
 
   const url = "https://gigapetserver.herokuapp.com";
 
@@ -47,43 +59,74 @@ export class WeekView extends Component {
     this.state = {
       week: moment(),
       servingsWeek: [],
-      vegetable:'',
-      fruit:'',
-      wholeGrain:'',
-      meat:'',
-      dairy:'',
-      treats:'',
+      vegetable:0,
+      fruit:0,
+      wholeGrain:0,
+      meat:0,
+      dairy:0,
+      treats:0,
       children: [],
+      selectedChild:'',
     };
   }
   componentDidMount() {
-    // this.servingsWeek();
+    this.servingsWeek();
     this.getChild()
 
    }
- // servingsWeek = () => {
-   //   const userdata = JSON.parse(localStorage.getItem("userdata"));
-   //   axios
-   //     .post(
-   //       `${url}/api/app/get_month_stats`,
-   //       {
-   //         parentId: userdata.userId
-   //       },
-   //       {
-   //         headers: {
-   //           Authorization: userdata.token
-   //         }
-   //       }
-   //     )
-   //     .then(res =>
-   //       this.setState({
-   //         servingsWeek: [...res.data] //  May need Changing
-   //       })
-   //     )
-   //     .catch(err => {
-   //       console.log(err);
-   //     });
-   // };
+
+   handleChanges = event => {
+    event.preventDefault();
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+
+ servingsWeek = () => {
+  const userdata = JSON.parse(localStorage.getItem("userdata"));
+  console.log('running')
+  axios
+    .post(
+      `${url}/api/app/getstats`,
+      {
+        parentId: userdata.userId,
+        dateStart: this.state.week.startOf("week").format("YYYY-MM-DD"),
+        dateEnd: this.state.week.endOf("week").format("YYYY-MM-DD"),
+        fullName: this.state.selectedChild,
+      },
+      {
+        headers: {
+          Authorization: userdata.token
+        }
+      }
+    )
+    .then(res => {
+      let response = {
+        "vegetable": 0,
+        "meat": 0,
+        "fruit": 0,
+        "dairy": 0,
+        "wholeGrain": 0,
+        "treats": 0,
+      }
+      res.data.map(item => {
+        response[item.foodType] = item.count;
+      })
+      console.log(response);
+      this.setState({
+          vegetable: response["vegetable"],
+          meat: response["meat"],
+          fruit: response["fruit"],
+          dairy: response["dairy"],
+          wholeGrain: response["wholeGrain"],
+          treats: response["treats"]
+        })
+    }
+    )
+    .catch(err => {
+      console.log(err);
+    });
+};
 
 //api/app/childnames
 getChild = () => {
@@ -116,7 +159,7 @@ getChild = () => {
     this.setState({
       week: week.subtract(1, "week")
     });
-        // this.servingsWeek();
+        this.servingsWeek();
 
   };
 
@@ -126,7 +169,7 @@ getChild = () => {
     this.setState({
       week: week.add(1, "week")
     });
-        // this.servingsWeek();
+        this.servingsWeek();
 
   };
   renderWeekLabel() {
@@ -157,13 +200,23 @@ getChild = () => {
         <DayNames />
         <Week key={date} date={date.clone()} week={week} />
         <Label>
-            <Select name = "fullName" value={this.state.fullName}>
+            <Select name="selectedChild" value={this.state.selectedChild} onChange={this.handleChanges}>
                   <option value ="" disabled hidden>Select Child...</option>
                   {this.state.children.map((child, index) => {
                   return <option key = {index} value = {child.fullName}> {child.fullName} </option>
                 })}
             </Select>
         </Label>
+        <button onClick={() => this.servingsWeek()}>RUN</button>
+
+        <Servings>
+          <Item>Vegetable Servings: {this.state.vegetable}</Item>
+          <Item>Fruit Servings: {this.state.fruit}</Item>
+          <Item>WholeGrain Servings: {this.state.wholeGrain}</Item>
+          <Item>Meat Servings: {this.state.meat}</Item>
+          <Item>Dairy Servings: {this.state.dairy}</Item>
+          <Item>Treats Servings: {this.state.treats}</Item>
+        </Servings>
       </div>
     );
   }

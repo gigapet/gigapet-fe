@@ -56,6 +56,8 @@ const Item = styled.div`
   width:31%;
   text-align:left;
   padding:1rem
+  color:black;
+
 `;
 
 const url = "https://gigapetserver.herokuapp.com";
@@ -67,45 +69,76 @@ export class Month extends Component {
     this.state = {
       month: moment(),
       servingsMonth: [],
-      vegetable: "",
-      fruit: "",
-      wholeGrain: "",
-      meat: "",
-      dairy: "",
-      treats: "",
-
+      vegetable: 0,
+      fruit: 0,
+      wholeGrain: 0,
+      meat: 0,
+      dairy: 0,
+      treats: 0,
+      selectedChild: '',
       children: []
     };
   }
 
   componentDidMount() {
-    // this.ServingMonth();
+    this.ServingMonth();
     this.getChild();
   }
 
-  // ServingMonth = () => {
-  //   const userdata = JSON.parse(localStorage.getItem("userdata"));
-  //   axios
-  //     .post(
-  //       `${url}/api/app/get_month_stats`,
-  //       {
-  //         parentId: userdata.userId
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: userdata.token
-  //         }
-  //       }
-  //     )
-  //     .then(res =>
-  //       this.setState({
-  //         servingsMonth: [...res.data] //  May need Changing
-  //       })
-  //     )
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // };
+  handleChanges = event => {
+    event.preventDefault();
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+  
+  ServingMonth = () => {
+    const userdata = JSON.parse(localStorage.getItem("userdata"));
+    console.log('running')
+    axios
+      .post(
+        `${url}/api/app/getstats`,
+        {
+          parentId: userdata.userId,
+          dateStart: this.state.month.startOf("month").format("YYYY-MM-DD"),
+          dateEnd: this.state.month.endOf("month").format("YYYY-MM-DD"),
+          fullName: this.state.selectedChild,
+        },
+        {
+          headers: {
+            Authorization: userdata.token
+          }
+        }
+      )
+      .then(res => {
+        let response = {
+          "vegetable": 0,
+          "meat": 0,
+          "fruit": 0,
+          "dairy": 0,
+          "wholeGrain": 0,
+          "treats": 0,
+        }
+
+        res.data.map(item => {
+          response[item.foodType] = item.count;
+        })
+
+        console.log(response);
+        this.setState({
+            vegetable: response["vegetable"],
+            meat: response["meat"],
+            fruit: response["fruit"],
+            dairy: response["dairy"],
+            wholeGrain: response["wholeGrain"],
+            treats: response["treats"]
+          })
+      }
+      )
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   //api/app/childnames
   getChild = () => {
@@ -140,7 +173,6 @@ export class Month extends Component {
     this.setState({
       month: month.subtract(1, "month")
     });
-    // this.ServingMonth();
   };
 
   next = () => {
@@ -149,7 +181,6 @@ export class Month extends Component {
     this.setState({
       month: month.add(1, "month")
     });
-    // this.ServingMonth();
   };
 
   renderWeeks() {
@@ -206,7 +237,7 @@ export class Month extends Component {
         </header>
         <CalView>{this.renderWeeks()}</CalView>
         <Label>
-          <Select name="fullName" value={this.state.fullName}>
+          <Select name="selectedChild" value={this.state.selectedChild} onChange={this.handleChanges}>
             <option value="" disabled hidden>
               Select Child...
             </option>
@@ -220,6 +251,7 @@ export class Month extends Component {
             })}
           </Select>
         </Label>
+        <button onClick={() => this.ServingMonth()}>RUN</button>
         <Servings>
           <Item>Vegetable Servings: {this.state.vegetable}</Item>
           <Item>Fruit Servings: {this.state.fruit}</Item>

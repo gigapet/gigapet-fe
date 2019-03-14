@@ -8,13 +8,7 @@ import Info from './Info';
 
 
 class HomePageView extends React.Component {
-   constructor(props) {
-      super(props);
-      this.state = {  }
-   }
-
-
-   render() { 
+ render() { 
       return ( 
          <div>
             <HomePageNav signOut = {this.props.signOut}/>
