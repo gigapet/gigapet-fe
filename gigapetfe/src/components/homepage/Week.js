@@ -29,7 +29,7 @@ class Week extends React.Component {
 
     return (
       <NumDayWeek> 
-      {days.map(day =>(  
+      {days.map(day =>( 
         <Day day={day} key={day.date}/>
       ))}
       </NumDayWeek>
