@@ -12,6 +12,7 @@ const NumDay = styled(NavLink)`
     margin: 0 auto;
     text-decoration: none;
     color: white;
+    border: 1px solid black;
     :hover {
       background: darkgrey;
       color: black; 

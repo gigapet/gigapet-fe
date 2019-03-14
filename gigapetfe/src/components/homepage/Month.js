@@ -16,9 +16,11 @@ const MonthLabelContainer = styled.div`
   display:flex;
   justify-content:center;
 `;
+
 const MonthLabel = styled.h1`
   margin: 0 auto 2rem;
   font-size: 7rem;
+  text-shadow: 1rem 1rem 1rem black;
 
 `;
 
@@ -26,6 +28,10 @@ const Arrows = styled.i`
   font-size: 4rem;
   margin: auto 0;
   padding: 0rem 3rem;
+`;
+
+const CalView = styled.div`
+  border: 3px solid black;
 `;
 
 export class Month extends Component {
@@ -104,7 +110,7 @@ render() {
         </MonthLabelContainer>
         <DayNames />
       </header>
-      {this.renderWeeks()}
+      <CalView>{this.renderWeeks()}</CalView>
     </CalendarGeneral>
   );
 }

@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import moment from 'moment';
-axios.defaults.withCredentials = true;
+
+const Title = styled.h1`
+  color: white;
+  text-shadow: 1.5rem 1.5rem .5rem black;
+  font-size: 5rem;
+`;
 
 const MealWrapper = styled.div`
     padding-top: 5rem;
@@ -32,7 +36,7 @@ const ChildForm = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(116, 116, 145);
+    background-color: rgb(126, 116, 99);
     border-left: 2px solid black;
     border-bottom: 2px solid black;
     height: 100%;
@@ -53,6 +57,7 @@ const Input = styled.input`
 const Div = styled.div`
 display: flex;
 flex-wrap: wrap;
+justify-content: center;
 `;
 
 const Box = styled.div`
@@ -63,7 +68,7 @@ margin: 5rem;
 width: 30rem;
 height: 30rem;
 justify-content: center;
-background: gray;
+background: rgb(126, 116, 99);
 `;
 
 const P = styled.p`
@@ -93,17 +98,19 @@ flex-direction: row;
 `;
 
 const Button = styled.button`
-    color: white;
-    background: midnightblue;
+    color: teal;
+    background: black;
     font-size: 1.8rem;
     padding: 2rem 8rem;
     border-radius: 1rem;
     margin: 1.5rem;
     transition: 1s ease;
+    border: 2px solid teal;
 
     :hover{
-        color: teal;
+        color: red;
         transform: scale(1.1, .8);
+        border: 2px solid red;
     }
 `;
 
@@ -154,7 +161,7 @@ export default class DayCard extends Component {
 
         addChild: '',
         
-        day: `.`,
+        day: true,
         fullName: '',
         mealTime: '',
         foodType: '',
@@ -307,11 +314,11 @@ deleteFoodEntry = (event, entry) => {
      parentId: userdata.userId,
      date: date
     },
-    { 
-      // headers: {
-      // Authorization: userdata.token
-      // }
-    }
+    // { 
+    //   // headers: {
+    //   // Authorization: userdata.token
+    //   // }
+    // }
   )
 
   .then(res => {
@@ -323,6 +330,38 @@ deleteFoodEntry = (event, entry) => {
   .catch( error => console.log('OHHHH NOOOOO', error));
 }
 
+updatePost = (event, entry) => {
+  event.preventDefault();
+  const userdata = JSON.parse(localStorage.getItem('userdata'));
+  const date =  this.props.match.params.date;
+  axios
+    .put(`${url}/api/app/updateFood`, {
+      fullName: this.state.fullName,
+      mealTime: this.state.mealTime,
+      foodType: this.state.foodType,
+      foodName: this.state.foodName,
+      parentId: userdata.userId,
+      date: date,
+      id: entry
+    },
+    //     { 
+    //   // headers: {
+    //   // Authorization: userdata.token
+    //   // }
+    // }
+    )
+    
+  .then(res => {
+    console.log(res.data);
+    this.setState({
+      entry: res.data
+})})
+
+.catch( error => console.log('OHHHH NOOOOO', error));
+}
+
+
+
 
   render() {
     if (!this.state.day) {
@@ -330,9 +369,9 @@ deleteFoodEntry = (event, entry) => {
     }
 
     return (
-    <Wrapper>
-      <MealWrapper>
-        <h1> Today's Entries! {moment().format('dddd Do')} </h1>
+      <Wrapper>
+      <MealWrapper> 
+        <Title> Meal Entries </Title>
       <Div>
            {this.state.entry.map((entry)=>{
               return (
@@ -353,7 +392,6 @@ deleteFoodEntry = (event, entry) => {
           })}
       </Div>
       </MealWrapper>
-
       <ChildForm>
         <h2>Create a child here.</h2>
           <Input 
@@ -362,11 +400,8 @@ deleteFoodEntry = (event, entry) => {
             value = {this.state.addChild}
             name = "addChild"
             onChange = {this.handleChanges}/>
-
           <Button onClick = {this.addChild}> Add Child </Button>
-
         <h2>Create a Meal Entry here.</h2>
-
           <label>
               <Select name = "fullName" value={this.state.fullName} onChange={this.handleChanges}>
                   <option value ="" disabled hidden>Select Child...</option>
@@ -375,7 +410,6 @@ deleteFoodEntry = (event, entry) => {
                   })}
               </Select>
           </label>
-
           <label>
               <Select name = "mealTime" value={this.state.mealTime} onChange={this.handleChanges}>
                   <option value ="" disabled hidden>Select Meal...</option>
@@ -385,7 +419,6 @@ deleteFoodEntry = (event, entry) => {
                   <option value="dessert">Dessert</option>
               </Select>
           </label>
-
           <label>
               <Select name = "foodType" value = {this.state.foodType} onChange={this.handleChanges}>
                   <option value="" disabled hidden>Select food type...</option>
@@ -399,20 +432,16 @@ deleteFoodEntry = (event, entry) => {
                   <option value="treats">Treats</option>
               </Select>
           </label>
-
           <Input 
           placeholder = "Foodname..."
           type = "text"
           value = {this.state.foodName}
           name = "foodName"
           onChange = {this.handleChanges}/>
-
           <Button onClick = {this.postEntry}> Add Meal </Button>
-
      
       </ChildForm>
     </Wrapper>
-
     );
   }
 }

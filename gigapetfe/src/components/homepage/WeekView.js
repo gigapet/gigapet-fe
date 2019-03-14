@@ -18,6 +18,8 @@ const Arrows = styled.i`
 const MonthLabel = styled.h1`
   margin: 0 auto 2rem;
   font-size: 5rem;
+  color: white;
+  text-shadow: 1rem 1rem 1rem black;
 `;
 export class WeekView extends Component {
     constructor(props) {
@@ -48,7 +50,7 @@ export class WeekView extends Component {
       return <span className="week-label">{week.startOf('week').format("MMMM Do")} - {week.endOf('week').format("MMMM Do YYYY")}</span>;
     }
   render() {
-    const { selected, week } = this.state;
+    const { week } = this.state;
     let date = this.state.week.clone().startOf("week").add("d" -1).day("Sunday");
     
     return (

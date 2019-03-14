@@ -18,17 +18,27 @@ const Nav = styled.nav`
 `;
 
 const StyledNavLink = styled(Link)`
-    font-size: 1.8rem;
+    font-size: 2rem;
     text-decoration: none;
     color: darkslateblue;
     padding-right: 5rem;
+    transition: 500ms ease;
+
+    :hover {
+        transform: scale(1.02, 1.02)
+    }
 `;
 
 const StyledLink = styled(Link)`
-    font-size: 1.8rem;
+    font-size: 2rem;
     text-decoration: none;
     color: darkslateblue;
     padding-right: 5rem;
+    transition: 500ms ease;
+
+    :hover {
+        transform: scale(1.03, 1.03)
+    }
 `;
 
 
