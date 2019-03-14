@@ -106,54 +106,12 @@ links.forEach(function(section) {
 });
 
 
+let slides = document.querySelectorAll('.citem');
+let currentSlide = 0;
+let timing = setInterval(nextSlide,2000);
 
-
-
-
-class Carousel {
-  constructor(carousel) {
-      this.carousel = carousel;
-      this.citems = document.querySelectorAll('.citem');
-      this.citems[0].style.display = 'block';
-      this.current = 0;
-      this.timer = null;
-
-      this.timer();
-  }
-
-  changeItem(goRight) {
-
-      this.carouselItems[this.currentItem].style.display = 'none';
-
-      if(goRight) {
-          if(this.currentItem + 1 > this.carouselItems.length - 1) {
-              this.currentItem = 0;
-          } else {
-              this.currentItem++;
-          }
-      } else {
-          if(this.currentItem - 1 < 0) {
-              this.currentItem = this.carouselItems.length - 1;
-          } else {
-              this.currentItem--;
-          }
-      }
-
-      this.carouselItems[this.currentItem].style.display = 'block';
-
-      //Reset Timer
-      this.resetTimer();
-  }
-
-  timer() {
-      clearInterval(this.timer);  
-
-      this.timer = setInterval(() => {
-          this.changeItem(true);
-      }, 3000);
-  }
+function nextSlide() {
+  slides[currentSlide].className = 'citem';
+  currentSlide = (currentSlide+1)%slides.length;
+  slides[currentSlide].className = 'active-img';
 }
-
-document.querySelectorAll('.features').forEach(function(carousel){
-  return new Carousel(carousel);
-});
