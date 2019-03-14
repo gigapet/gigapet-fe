@@ -48,6 +48,20 @@ const Label = styled.label`
     display:flex;
 `;
 
+const Servings = styled.div`
+  display:flex;
+  flex-wrap: wrap;
+
+`;
+const Item = styled.div`
+  font-size:1.8rem;
+  width:31%;
+  text-align:left;
+  padding:1rem
+  color:black;
+
+`;
+
 const url = "https://gigapetserver.herokuapp.com";
 
 export class Month extends Component {
@@ -211,6 +225,14 @@ export class Month extends Component {
                 })}
             </Select>
         </Label>
+        <Servings>
+          <Item>Vegetable Servings: {this.state.vegetable}</Item>
+          <Item>Fruit Servings: {this.state.fruit}</Item>
+          <Item>WholeGrain Servings: {this.state.wholeGrain}</Item>
+          <Item>Meat Servings: {this.state.meat}</Item>
+          <Item>Dairy Servings: {this.state.dairy}</Item>
+          <Item>Treats Servings: {this.state.treats}</Item>
+        </Servings>
       </CalendarGeneral>
     );
   }
