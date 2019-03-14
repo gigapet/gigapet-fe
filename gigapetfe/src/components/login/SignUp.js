@@ -80,6 +80,7 @@ class SignUp extends React.Component {
 
             .then(res => {
                 console.log('Its working', res)
+                alert('Account registration is successful')
             })
 
             .catch( error => console.log('OH NO', error));

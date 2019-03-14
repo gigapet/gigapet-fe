@@ -73,6 +73,7 @@ width: 30rem;
 height: 30rem;
 justify-content: center;
 background: rgb(126, 116, 99);
+border-radius: 1rem;
 `;
 
 const P = styled.p`
@@ -392,11 +393,10 @@ letsDisco = (event, entry) => {
 }
 
 
-
   render() {
     const date =  this.props.match.params.date;
     let title = moment(date).format('MMM DD YYYY')
-
+    
     if(this.state.updating === false){
     return (
       <Wrapper>
@@ -411,10 +411,10 @@ letsDisco = (event, entry) => {
                     <i className="fas fa-trash-alt" onClick={(event) => {this.deleteFoodEntry(event, entry.id)}}/>
                     <Header> Meal Entry </Header>
                   </HeaderDiv>
-                    <P>{entry.fullName} </P> 
-                    <P>{entry.mealTime} </P>
-                    <P>{entry.foodType} </P>
-                    <P>{entry.foodName} </P>
+                    <P>{entry.fullName.charAt(0).toUpperCase() + entry.fullName.slice(1)} </P> 
+                    <P>{entry.mealTime.charAt(0).toUpperCase() + entry.mealTime.slice(1)} </P>
+                    <P>{entry.foodType.charAt(0).toUpperCase() + entry.foodType.slice(1)} </P>
+                    <P>{entry.foodName.charAt(0).toUpperCase() + entry.foodName.slice(1)} </P>
                     <Update onClick={(event) => {this.toggleEdit(event, entry.id)}}> Update </Update>
               </Box>
         
@@ -454,7 +454,7 @@ letsDisco = (event, entry) => {
               <Select name = "foodType" value = {this.state.foodType} onChange={this.handleChanges}>
                   <option value="" disabled hidden>Select food type...</option>
                   <option value="fruit">Fruit</option>
-                  <option value="vegetable">Vegetable</option>
+                  <option value="vegetable">vegetable</option>
                   <option value="wholeGrain">Whole Grain</option>
                   <option value="meat">Meat</option>
                   <option value="dairy">Dairy</option>
@@ -517,21 +517,21 @@ letsDisco = (event, entry) => {
         <label>
             <Select name = "mealTime" value={this.state.mealTime} onChange={this.handleChanges}>
                 <option value ="" disabled hidden>Update Meal...</option>
-                <option value="Breakfast">Breakfast</option>
-                <option value="Lunch">Lunch</option>
-                <option value="Dinner">Dinner</option>
-                <option value="Dessert">Dessert</option>
+                <option value="breakfast">Breakfast</option>
+                <option value="lunch">Lunch</option>
+                <option value="dinner">Dinner</option>
+                <option value="dessert">Dessert</option>
             </Select>
         </label>
         <label>
             <Select name = "foodType" value = {this.state.foodType} onChange={this.handleChanges}>
                 <option value="" disabled hidden>Update Food Type...</option>
-                <option value="Fruit">Fruit</option>
-                <option value="Vegetable">Vegetable</option>
-                <option value="WholeGrain">Whole Grain</option>
-                <option value="Meat">Meat</option>
-                <option value="Dairy">Dairy</option>
-                <option value="Treats">Treats</option>
+                <option value="fruit">Fruit</option>
+                <option value="vegetable">Vegetable</option>
+                <option value="wholeGrain">Whole Grain</option>
+                <option value="meat">Meat</option>
+                <option value="dairy">Dairy</option>
+                <option value="treats">Treats</option>
             </Select>
         </label>
         <Input 
