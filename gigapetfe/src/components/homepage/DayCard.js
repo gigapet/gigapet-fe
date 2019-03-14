@@ -131,24 +131,29 @@ const Update = styled.button`
     }
 `;
 
-const Delete = styled.button`
-    border-radius: 5rem;
-    font-size: 1.5rem;
-    background: black;
-    color: teal;
-    padding: .5rem .8rem;
-    border: 2px solid teal;
-    transition: 500ms ease;
+// const Delete = styled.i`
+//     font-size: 3rem;
+//     transition: 500ms ease;
+// `;
 
-    :hover {
-      color: red;
-      border: 2px solid red;
-    }
+// const Delete = styled.i`
+//     border-radius: 5rem;
+//     font-size: 3rem;
+//     background: black;
+//     color: teal;
+//     padding: .5rem .8rem;
+//     border: 2px solid teal;
+//     transition: 500ms ease;
 
-    :active {
-      transform: scale(.9, .9)
-    }
-`;
+//     :hover {
+//       color: red;
+//       border: 2px solid red;
+//     }
+
+//     :active {
+//       transform: scale(.9, .9)
+//     }
+// `;
 
 const url = "https://gigapetserver.herokuapp.com";
 
@@ -160,12 +165,13 @@ export default class DayCard extends Component {
         children: [],
 
         addChild: '',
-        
-        day: true,
+
         fullName: '',
         mealTime: '',
         foodType: '',
-        foodName: ''
+        foodName: '',
+
+        updating: true
 
 
     };
@@ -364,10 +370,7 @@ updatePost = (event, entry) => {
 
 
   render() {
-    if (!this.state.day) {
-      return <h1>Loading dietary information...</h1>;
-    }
-
+    if(this.state.updating === false){
     return (
       <Wrapper>
       <MealWrapper> 
@@ -378,7 +381,8 @@ updatePost = (event, entry) => {
                 
               <Box key = {entry.id}>
                   <HeaderDiv>
-                    <Delete onClick={(event) => {this.deleteFoodEntry(event, entry.id)}}> X </Delete> 
+                    <i className="fas fa-trash-alt" onClick={(event) => {this.deleteFoodEntry(event, entry.id)}}/>
+                    {/* <Delete onClick={(event) => {this.deleteFoodEntry(event, entry.id)}}> X </Delete>  */}
                     <Header> Meal Entry </Header>
                   </HeaderDiv>
                     <P>{entry.fullName} </P> 
@@ -392,6 +396,7 @@ updatePost = (event, entry) => {
           })}
       </Div>
       </MealWrapper>
+
       <ChildForm>
         <h2>Create a child here.</h2>
           <Input 
@@ -439,9 +444,86 @@ updatePost = (event, entry) => {
           name = "foodName"
           onChange = {this.handleChanges}/>
           <Button onClick = {this.postEntry}> Add Meal </Button>
-     
       </ChildForm>
+      </Wrapper> )
+} else {
+  return (
+    <Wrapper>
+    <MealWrapper> 
+      <Title> Meal Entries </Title>
+    <Div>
+         {this.state.entry.map((entry)=>{
+            return (
+              
+            <Box key = {entry.id}>
+                <HeaderDiv>
+                  {/* <Delete onClick={(event) => {this.deleteFoodEntry(event, entry.id)}}> X </Delete>  */}
+                  <i class="fas fa-backspace" onClick={(event) => {this.deleteFoodEntry(event, entry.id)}}/>
+                  <Header> Meal Entry </Header>
+                </HeaderDiv>
+                  <P>{entry.fullName} </P> 
+                  <P>{entry.mealTime} </P>
+                  <P>{entry.foodType} </P>
+                  <P>{entry.foodName} </P>
+                  {/* <Update onClick={(event) => {this.deleteFoodEntry(event, entry.id)}}> Update </Update> */}
+            </Box>
+      
+            )
+        })}
+    </Div>
+    </MealWrapper>
+
+    <ChildForm>
+      <h2>Add Child Here.</h2>
+        <Input 
+          placeholder = "Add Child..."
+          type = "text"
+          value = {this.state.addChild}
+          name = "addChild"
+          onChange = {this.handleChanges}/>
+        <Button onClick = {this.addChild}> Add Child </Button>
+      <h2>Update Meal Entry Here.</h2>
+        <label>
+            <Select name = "fullName" value={this.state.fullName} onChange={this.handleChanges}>
+                <option value ="" disabled hidden>Update Child...</option>
+                  {this.state.children.map((child, index) => {
+                  return <option key = {index} value = {child.fullName}> {child.fullName} </option>
+                })}
+            </Select>
+        </label>
+        <label>
+            <Select name = "mealTime" value={this.state.mealTime} onChange={this.handleChanges}>
+                <option value ="" disabled hidden>Update Meal...</option>
+                <option value="breakfast">Breakfast</option>
+                <option value="lunch">Lunch</option>
+                <option value="dinner">Dinner</option>
+                <option value="dessert">Dessert</option>
+            </Select>
+        </label>
+        <label>
+            <Select name = "foodType" value = {this.state.foodType} onChange={this.handleChanges}>
+                <option value="" disabled hidden>Update Food Type...</option>
+                <option value="fruit">Fruit</option>
+                <option value="vegetable">Vegetable</option>
+                <option value="wholeGrain">Whole Grain</option>
+                <option value="meat">Meat</option>
+                <option value="dairy">Dairy</option>
+                <option value="fat">Fat</option>
+                <option value="oil">Oil</option>
+                <option value="treats">Treats</option>
+            </Select>
+        </label>
+        <Input 
+        placeholder = "Update Food Name..."
+        type = "text"
+        value = {this.state.foodName}
+        name = "foodName"
+        onChange = {this.handleChanges}/>
+        <Button onClick = {this.postEntry}> Update Meal </Button>
+    </ChildForm> 
     </Wrapper>
-    );
+    )
+
+    }
   }
 }

@@ -43,3 +43,21 @@ code {
  ::-webkit-scrollbar {
   width: 0px; 
   }
+
+.fa-trash-alt {
+  font-size: 2rem;
+  transition: 500ms ease;
+}
+
+.fa-trash-alt:hover{
+  color: red;
+}
+
+.fa-backspace {
+  font-size: 2rem;
+  transition: 500ms ease;
+}
+
+.fa-backspace:hover{
+  color: red;
+}

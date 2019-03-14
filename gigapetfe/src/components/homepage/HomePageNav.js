@@ -5,8 +5,8 @@ import Day from './Day';
 import WeekView from './WeekView';
 import Month from './Month';
 import { LoginPage } from '../login/LoginPage';
-import './index.css';
 import moment from 'moment';
+import Info from './Info';
 
 const Nav = styled.nav`
     padding: 2rem 0 2rem 0;
@@ -56,6 +56,7 @@ class HomePageNav extends React.Component {
         
         <div>
            <Nav>
+                <StyledNavLink to= "/info" component = {Info}> Home </StyledNavLink>
                 <StyledNavLink to= "/month"  component = {Month}> Month </StyledNavLink>
                 <StyledNavLink to= "/month/week"  component = {WeekView}> Week </StyledNavLink>
                 <StyledNavLink to= {`/month/week/${moment().format('MM_DD_YYYY')}`} component = {Day}> Day </StyledNavLink>

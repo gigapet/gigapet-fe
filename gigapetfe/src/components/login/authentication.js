@@ -44,7 +44,7 @@ const authenticate = App => Login =>
                     this.setState({
                         loggedIn: true
                     });
-                       this.props.history.push('/month');
+                       this.props.history.push('/info');
                 })
                 .catch(err => alert(err));
             }
