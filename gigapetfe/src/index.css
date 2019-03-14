@@ -216,6 +216,20 @@ img {
   width: 35%;
 }
 
+.carousel {
+  position: relative;
+  overflow: hidden;
+  widows: 100%;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 1s;
+}
+
+.active-img {
+    opacity: 1;
+    z-index: 2;
+};
+
 .right-side .citem {
   display: none;
   width: auto;
@@ -418,6 +432,11 @@ img {
     text-align: center;
     margin: 0 12.5%;
   }
+}
+
+/*contact page*/
+.contactinfo {
+  margin: 10px 0 20px 35%;
 }
 
 /*footer*/
