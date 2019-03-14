@@ -19,6 +19,8 @@ const Nav = styled.nav`
     @media (max-width: 50rem){
         flex-direction: column;
         padding: 0;
+        background:rgb(54, 53, 53);
+    
     }
 `;
 
@@ -30,13 +32,15 @@ const StyledNavLink = styled(Link)`
     transition: 500ms ease;
 
     :hover {
-        transform: scale(1.02, 1.02)
-        
+        transform: scale(1.02, 1.02);
     }
 
     @media (max-width: 50rem){
         flex-direction: column;
         padding: 0;
+        padding: 1.5rem;
+        border-bottom: 1px solid white;
+        color: white;
     }
 `;
 
@@ -46,13 +50,15 @@ const StyledLink = styled(Link)`
     color: darkslateblue;
     padding-right: 5rem;
     transition: 500ms ease;
+    border-bottom: 1px solid white;
 
     :hover {
-        transform: scale(1.03, 1.03)
+        transform: scale(1.03, 1.03);
     }
 
     @media (max-width: 50rem){
-        padding: 0;
+        padding: 1.5rem;
+        color: white;
     }
 `;
 

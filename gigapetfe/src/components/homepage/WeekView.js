@@ -158,7 +158,7 @@ getChild = () => {
         <Week key={date} date={date.clone()} week={week} />
         <Label>
             <Select name = "fullName" value={this.state.fullName}>
-                  <option value ="" disabled hidden>Select Child...</option>
+                  <option value = "" disabled hidden> Select Child...</option>
                   {this.state.children.map((child, index) => {
                   return <option key = {index} value = {child.fullName}> {child.fullName} </option>
                 })}
