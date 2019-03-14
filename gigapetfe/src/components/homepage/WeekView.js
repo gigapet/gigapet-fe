@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Week from "./Week";
 import moment from "moment";
 import DayNames from "./DayNames";
+import axios from "axios";
 import styled from "styled-components";
 
 const MonthLabelContainer = styled.div`
@@ -17,15 +18,97 @@ const Arrows = styled.i`
 const MonthLabel = styled.h1`
   margin: 0 auto 2rem;
   font-size: 5rem;
+  color: white;
+  text-shadow: 1rem 1rem 1rem black;
+  `;
+  const Select = styled.select`
+    width: 27.5rem;
+    height: 5.5rem;
+    font-size: 1.8rem;
+    margin: 2rem 1rem 1rem 0;
+    border-radius: 1rem;
+    border: 2px solid black;
+    text-align: right;
+    padding-left: .5rem;
+    :first-child {
+      color: gray;
+    }
+
 `;
+const Label = styled.label`
+    display:flex;
+`;
+
+  const url = "https://gigapetserver.herokuapp.com";
+
 export class WeekView extends Component {
   constructor(props) {
     super(props);
     this.state = {
       week: moment(),
-      servingsWeek: []
+      servingsWeek: [],
+      vegetable:'',
+      fruit:'',
+      wholeGrain:'',
+      meat:'',
+      dairy:'',
+      treats:'',
+      children: [],
     };
   }
+  componentDidMount() {
+    // this.servingsWeek();
+    this.getChild()
+
+   }
+ // servingsWeek = () => {
+   //   const userdata = JSON.parse(localStorage.getItem("userdata"));
+   //   axios
+   //     .post(
+   //       `${url}/api/app/get_month_stats`,
+   //       {
+   //         parentId: userdata.userId
+   //       },
+   //       {
+   //         headers: {
+   //           Authorization: userdata.token
+   //         }
+   //       }
+   //     )
+   //     .then(res =>
+   //       this.setState({
+   //         servingsWeek: [...res.data] //  May need Changing
+   //       })
+   //     )
+   //     .catch(err => {
+   //       console.log(err);
+   //     });
+   // };
+
+//api/app/childnames
+getChild = () => {
+  const userdata = JSON.parse(localStorage.getItem('userdata'));
+  axios
+    .post(`${url}/api/app/childnames`, {
+      parentId: userdata.userId,
+    },
+    { 
+      headers: {
+      Authorization: userdata.token
+    }}
+    )
+    .then(res => {
+      console.log(res.data);
+      this.setState({
+        children: [...res.data]
+      })
+    })
+
+    .catch(err => {
+      console.log(err)
+    })
+}
+
 
   previous = () => {
     const { week } = this.state;
@@ -33,6 +116,8 @@ export class WeekView extends Component {
     this.setState({
       week: week.subtract(1, "week")
     });
+        // this.servingsWeek();
+
   };
 
   next = () => {
@@ -41,6 +126,8 @@ export class WeekView extends Component {
     this.setState({
       week: week.add(1, "week")
     });
+        // this.servingsWeek();
+
   };
   renderWeekLabel() {
     const { week } = this.state;
@@ -69,6 +156,14 @@ export class WeekView extends Component {
         </MonthLabelContainer>
         <DayNames />
         <Week key={date} date={date.clone()} week={week} />
+        <Label>
+            <Select name = "fullName" value={this.state.fullName}>
+                  <option value ="" disabled hidden>Select Child...</option>
+                  {this.state.children.map((child, index) => {
+                  return <option key = {index} value = {child.fullName}> {child.fullName} </option>
+                })}
+            </Select>
+        </Label>
       </div>
     );
   }

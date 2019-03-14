@@ -4,8 +4,7 @@ import styled from 'styled-components';
 
 const NumDayWeek = styled.div`
     display:flex;
-    background-color:midnightblue;
-    
+    background: rgb(26, 25, 25);    
 `;
 
 class Week extends React.Component {

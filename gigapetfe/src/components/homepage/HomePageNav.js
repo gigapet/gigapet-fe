@@ -13,21 +13,32 @@ import Info from './Info';
 const Nav = styled.nav`
     padding: 2rem 0 2rem 0;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-end;
     border-bottom: 3px solid black;
-    margin:0;
+    background: white;
+    min-width: 100%;
 `;
 
 const StyledNavLink = styled(NavLink)`
-    font-size: 1.8rem;
+    font-size: 2rem;
     text-decoration: none;
     color: darkslateblue;
+    padding-right: 5rem;
+    transition: 500ms ease;
+    :hover {
+        transform: scale(1.02, 1.02)
+    }
 `;
 
 const StyledLink = styled(Link)`
-    font-size: 1.8rem;
+    font-size: 2rem;
     text-decoration: none;
     color: darkslateblue;
+    padding-right: 5rem;
+    transition: 500ms ease;
+    :hover {
+        transform: scale(1.03, 1.03)
+    }
 `;
 
 

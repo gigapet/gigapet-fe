@@ -4,18 +4,20 @@ import styled from 'styled-components';
 const DayTitle = styled.div`
   display:flex;
   margin: 0 auto;
-  background-color: darkgrey;
+  background-color: rgb(26, 25, 25);
+  border: 3px solid black;
 `;
 
 const DayT = styled.span`
-    display:flex;
-    width: 14rem;
-    height: 4rem;
-    justify-content: space-evenly;
-    align-items:center;
-    font-size: 2.5rem;
-    margin:1rem auto;
-    color:black;
+  display:flex;
+  width: 14rem;
+  height: 4rem;
+  justify-content: space-evenly;
+  align-items:center;
+  font-size: 2.5rem;
+  margin:1rem auto;
+  color: white;
+
 `;
 
 class DayNames extends React.Component {

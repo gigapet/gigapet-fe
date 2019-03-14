@@ -6,7 +6,6 @@ import axios from "axios";
 import styled from "styled-components";
 
 const CalendarGeneral = styled.div`
-  background: midnightblue;
   color: white;
   height: 100vh;
   padding: 1rem;
@@ -20,6 +19,7 @@ const MonthLabelContainer = styled.div`
 const MonthLabel = styled.h1`
   margin: 0 auto 2rem;
   font-size: 7rem;
+  text-shadow: 1rem 1rem 1rem black;
 `;
 
 const Arrows = styled.i`
@@ -27,6 +27,37 @@ const Arrows = styled.i`
   margin: auto 0;
   padding: 0rem 3rem;
 `;
+const CalView = styled.div`
+  border: 3px solid black;
+`;
+const Select = styled.select`
+  width: 27.5rem;
+  height: 5.5rem;
+  font-size: 1.8rem;
+  margin: 2rem 1rem 1rem 0;
+  border-radius: 1rem;
+  border: 2px solid black;
+  text-align: right;
+  padding-left: 0.5rem;
+  :first-child {
+    color: gray;
+  }
+`;
+const Label = styled.label`
+  display: flex;
+`;
+const Servings = styled.div`
+  display:flex;
+  flex-wrap: wrap;
+
+`;
+const Item = styled.div`
+  font-size:1.8rem;
+  width:31%;
+  text-align:left;
+  padding:1rem
+`;
+
 const url = "https://gigapetserver.herokuapp.com";
 
 export class Month extends Component {
@@ -35,19 +66,53 @@ export class Month extends Component {
 
     this.state = {
       month: moment(),
-      servingsMonth: []
+      servingsMonth: [],
+      vegetable: "",
+      fruit: "",
+      wholeGrain: "",
+      meat: "",
+      dairy: "",
+      treats: "",
+
+      children: []
     };
   }
 
   componentDidMount() {
-    this.ServingMonth();
+    // this.ServingMonth();
+    this.getChild();
   }
 
-  ServingMonth = () => {
+  // ServingMonth = () => {
+  //   const userdata = JSON.parse(localStorage.getItem("userdata"));
+  //   axios
+  //     .post(
+  //       `${url}/api/app/get_month_stats`,
+  //       {
+  //         parentId: userdata.userId
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: userdata.token
+  //         }
+  //       }
+  //     )
+  //     .then(res =>
+  //       this.setState({
+  //         servingsMonth: [...res.data] //  May need Changing
+  //       })
+  //     )
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // };
+
+  //api/app/childnames
+  getChild = () => {
     const userdata = JSON.parse(localStorage.getItem("userdata"));
     axios
       .post(
-        `${url}/api/app/get_month_stats`,
+        `${url}/api/app/childnames`,
         {
           parentId: userdata.userId
         },
@@ -57,11 +122,13 @@ export class Month extends Component {
           }
         }
       )
-      .then(res =>
+      .then(res => {
+        console.log(res.data);
         this.setState({
-          servingsMonth: [...res.data] //  May need Changing
-        })
-      )
+          children: [...res.data]
+        });
+      })
+
       .catch(err => {
         console.log(err);
       });
@@ -73,7 +140,7 @@ export class Month extends Component {
     this.setState({
       month: month.subtract(1, "month")
     });
-    this.ServingMonth();
+    // this.ServingMonth();
   };
 
   next = () => {
@@ -82,7 +149,7 @@ export class Month extends Component {
     this.setState({
       month: month.add(1, "month")
     });
-    this.ServingMonth();
+    // this.ServingMonth();
   };
 
   renderWeeks() {
@@ -99,13 +166,7 @@ export class Month extends Component {
     const { month } = this.state;
 
     while (!done) {
-      weeks.push(
-        <Week
-          key={date}
-          date={date.clone()}
-          month={month}
-        />
-      );
+      weeks.push(<Week key={date} date={date.clone()} month={month} />);
 
       date.add(1, "w");
 
@@ -117,10 +178,8 @@ export class Month extends Component {
   }
 
   MonthDays = () => {
-    this.state.month.map(mon => (
-      mon.startOf("month")
-    ))
-  }
+    this.state.month.map(mon => mon.startOf("month"));
+  };
 
   renderMonthLabel() {
     const { month } = this.state;
@@ -145,7 +204,30 @@ export class Month extends Component {
           </MonthLabelContainer>
           <DayNames />
         </header>
-        {this.renderWeeks()}
+        <CalView>{this.renderWeeks()}</CalView>
+        <Label>
+          <Select name="fullName" value={this.state.fullName}>
+            <option value="" disabled hidden>
+              Select Child...
+            </option>
+            {this.state.children.map((child, index) => {
+              return (
+                <option key={index} value={child.fullName}>
+                  {" "}
+                  {child.fullName}{" "}
+                </option>
+              );
+            })}
+          </Select>
+        </Label>
+        <Servings>
+          <Item>Vegetable Servings: {this.state.vegetable}</Item>
+          <Item>Fruit Servings: {this.state.fruit}</Item>
+          <Item>WholeGrain Servings: {this.state.wholeGrain}</Item>
+          <Item>Meat Servings: {this.state.meat}</Item>
+          <Item>Dairy Servings: {this.state.dairy}</Item>
+          <Item>Treats Servings: {this.state.treats}</Item>
+        </Servings>
       </CalendarGeneral>
     );
   }

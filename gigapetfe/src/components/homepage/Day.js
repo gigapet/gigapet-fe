@@ -21,7 +21,7 @@ const NumDay = styled(NavLink)`
 class Day extends React.Component {
 
   render() {
-    let check = moment(this.props.day.date._d).format('MM_DD_YYYY');
+    let check = moment(this.props.day.date._d).format('YYYY-MM-DD');
     const { day: { date, number } } = this.props;
     return (
       <NumDay to= {`/month/week/${check}`} key={date.toString()} >
