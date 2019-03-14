@@ -20,11 +20,10 @@ class Tab {
     
     // Get the custom data attribute on the Link
     this.data = this.element.dataset.tab
-    console.log(this.data)
     
     // Get the associated page element
-    this.itemElement = document.querySelector(`.page[data-tab='${this.element.dataset.tab}']`);
-    
+    this.itemElement = document.querySelector(`.pitem[data-tab="${this.element.dataset.tab}"]`);
+
     // Using the Item element, create a new instance of the TabItem class
     this.page = new Page(this.itemElement);
     
@@ -82,39 +81,44 @@ class Page {
     // Select all page elements from the DOM
     const items = document.querySelectorAll('.pitem');
 
-    // Remove the class active from each element
-    items.forEach(function(card){
-      card.classList.remove('active-page')
-    });
-    
-    // Add a class active to this element
-    this.element.classList.add('active-page');
+    if (this.element.classList.contains('active-page')) {
+      //remove active from all
+      items.forEach(function(card){
+        card.classList.remove('active-page')
+      });
+    }
+
+    else {
+      // Remove the class active from each element
+      items.forEach(function(card){
+        card.classList.remove('active-page')
+      });
+      
+      // Add a class active to this element
+      this.element.classList.add('active-page');
+    }
   }
 }
 
 let links = document.querySelectorAll('.titem')
-// links.forEach(function(section) {
-//   return new Tab(section);
-// });
-console.log(links)
+links.forEach(function(section) {
+  return new Tab(section);
+});
+
+
+
 
 
 
 class Carousel {
   constructor(carousel) {
       this.carousel = carousel;
-      this.leftButton = carousel.querySelector('.left-button');
-      this.rightButton = carousel.querySelector('.right-button');
-      this.carouselItems = carousel.querySelectorAll('.card');
-      this.carouselItems[0].style.display = 'block';
-      this.currentItem = 0;
+      this.citems = document.querySelectorAll('.citem');
+      this.citems[0].style.display = 'block';
+      this.current = 0;
       this.timer = null;
 
-
-      this.leftButton.addEventListener('click', _ => this.changeItem(false));
-      this.rightButton.addEventListener('click', _ => this.changeItem(true));
-
-      this.resetTimer();
+      this.timer();
   }
 
   changeItem(goRight) {
@@ -141,7 +145,7 @@ class Carousel {
       this.resetTimer();
   }
 
-  resetTimer() {
+  timer() {
       clearInterval(this.timer);  
 
       this.timer = setInterval(() => {

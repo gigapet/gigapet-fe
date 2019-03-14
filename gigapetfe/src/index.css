@@ -126,6 +126,11 @@ img {
   margin: 0 30px;
 }
 
+.navbar a:hover {
+  color: orangered;
+  font-weight: bold;
+}
+
 .logo {
   width: 20%;
   height: auto;
@@ -181,7 +186,6 @@ img {
   margin-bottom: 10px;
 }
 
-
 .left-side .bottom {
   display: flex;
   justify-content: space-between;
@@ -220,6 +224,32 @@ img {
 
 .right-side .active-img {
   display: block;
+}
+
+/*main content tablet*/
+@media(max-width:850px) {
+  .maininfo {
+    flex-direction: column; 
+  }
+
+  .left-side {
+    width: 100%;
+    border: none;
+    padding: 0;
+  }
+
+  .left-side .top {
+    border: none;
+  }
+
+  .left-side .top h1 {
+    text-align: center;
+  }
+
+  .right-side {
+    width: 100%;
+    padding: 0;
+  }
 }
 
 /*main content mobile*/
@@ -276,8 +306,10 @@ img {
 .tabs {
   display: flex;
   justify-content: space-around;
-  align-items: flex-start;
+  align-items: center;
   height: 500px;
+  width: 80%;
+  margin-right: 10%;
 }
  
 .tabs h2 {
@@ -287,9 +319,21 @@ img {
   text-align: center;
 }
 
-.card img {
+.tabs img {
   height: 450px;
   width: auto;
+  filter: grayscale(1);
+  transform: skewY(-10deg);
+}
+
+.tabs img:hover {
+  filter: none;
+  border: 2px solid orangered;
+}
+
+.active-tab {
+  width: 100%;
+  margin: 0;
 }
 
 .active-tab h2 {
@@ -298,8 +342,14 @@ img {
 }
 
 .active-tab img {
-  height: 450px;
-  width: auto;
+  height: 400px;
+  width: 1000px;
+  filter: none;
+  transform: none;
+}
+
+.active-tab img:hover {
+  border: none;
 }
 
 .inactive-tab {
@@ -309,14 +359,66 @@ img {
 .pitem {
   display: none;
   width: 75%;
+  text-align: right;
 }
 
 .active-page {
-  display: flex;
+  display: block;
 }
 
+/*about tablet*/
+@media(max-width:850px) {
+  .aboutinfo {
+    flex-direction: row;
+  }
+
+  .tabs {
+    width: 100%;
+    margin: 0;
+  }
+
+  .active-tab img {
+    width: 1000px;
+    height: 400px;
+  }
+
+  .pitem {
+    text-align: left;
+    margin: 0 10px;
+  }
+}
 
 /*mobile about*/
+@media(max-width:500px) {
+  .aboutinfo {
+    flex-direction: column;
+  }
+
+  .tabs {
+    flex-direction: column;
+    width: 100%;
+    margin: 0 5%;
+    height: auto;
+  }
+
+  .tabs img {
+    transform: none;
+  }  
+
+  .active-tab h2 {
+    text-align: center;
+  }
+
+  .active-tab img {
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .pitem {
+    text-align: center;
+    margin: 0 12.5%;
+  }
+}
 
 /*footer*/
 footer {
