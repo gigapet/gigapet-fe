@@ -431,7 +431,7 @@ letsDisco = (event, entry) => {
         <h2>Create a Meal Entry here.</h2>
           <label>
               <Select name = "fullName" value={this.state.fullName} onChange={this.handleChanges}>
-                  <option value ="" disabled hidden>Select Child...</option>
+                  <option value ="" disabled hidden> Select Child... </option>
                     {this.state.children.map((child, index) => {
                     return <option key = {index} value = {child.fullName}> {child.fullName} </option>
                   })}

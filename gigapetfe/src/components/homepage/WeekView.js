@@ -39,6 +39,20 @@ const Label = styled.label`
     display:flex;
 `;
 
+const Servings = styled.div`
+  display:flex;
+  flex-wrap: wrap;
+
+`;
+const Item = styled.div`
+  font-size:1.8rem;
+  width:31%;
+  text-align:left;
+  padding:1rem
+  color:black;
+
+`;
+
   const url = "https://gigapetserver.herokuapp.com";
 
 export class WeekView extends Component {
@@ -158,12 +172,20 @@ getChild = () => {
         <Week key={date} date={date.clone()} week={week} />
         <Label>
             <Select name = "fullName" value={this.state.fullName}>
-                  <option value ="" disabled hidden>Select Child...</option>
+                  <option value = "" disabled hidden> Select Child...</option>
                   {this.state.children.map((child, index) => {
                   return <option key = {index} value = {child.fullName}> {child.fullName} </option>
                 })}
             </Select>
         </Label>
+        <Servings>
+          <Item>Vegetable Servings: {this.state.vegetable}</Item>
+          <Item>Fruit Servings: {this.state.fruit}</Item>
+          <Item>WholeGrain Servings: {this.state.wholeGrain}</Item>
+          <Item>Meat Servings: {this.state.meat}</Item>
+          <Item>Dairy Servings: {this.state.dairy}</Item>
+          <Item>Treats Servings: {this.state.treats}</Item>
+        </Servings>
       </div>
     );
   }
