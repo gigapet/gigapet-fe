@@ -171,7 +171,8 @@ export default class DayCard extends Component {
         foodType: '',
         foodName: '',
 
-        updating: true
+        updating: false,
+        updatingId: null,
 
 
     };
@@ -241,6 +242,25 @@ export default class DayCard extends Component {
         [event.target.name]: event.target.value
     })
 }
+
+  cancelEdit = event => {
+    event.preventDefault()
+    this.setState({
+      updating: false,
+      updatingId: null
+    })
+  }
+
+  toggleEdit = (event, foobar) => {
+    event.preventDefault()
+      this.setState({
+        updating: true,
+        updatingId: foobar 
+      })
+  }
+  
+
+
 
 //api/app/addChild --> needs parentId and fullname
 
@@ -314,17 +334,18 @@ deleteFoodEntry = (event, entry) => {
       const userdata = JSON.parse(localStorage.getItem('userdata'));
       const date =  this.props.match.params.date;
       console.log('function running', entry)
-  axios
-  .delete(`${url}/api/app/deletefood`, {
+ axios
+  .post(`${url}/api/app/deletefood`, {
      id: entry,
      parentId: userdata.userId,
      date: date
     },
-    // { 
-    //   // headers: {
-    //   // Authorization: userdata.token
-    //   // }
-    // }
+     { 
+        headers: {
+        Authorization: userdata.token,  
+        "Content-Type": "application/json"
+      },
+     }
   )
 
   .then(res => {
@@ -336,19 +357,21 @@ deleteFoodEntry = (event, entry) => {
   .catch( error => console.log('OHHHH NOOOOO', error));
 }
 
+
 updatePost = (event, entry) => {
   event.preventDefault();
   const userdata = JSON.parse(localStorage.getItem('userdata'));
   const date =  this.props.match.params.date;
   axios
-    .put(`${url}/api/app/updateFood`, {
+    .put(`${url}/api/app/updatefood`, {
       fullName: this.state.fullName,
       mealTime: this.state.mealTime,
       foodType: this.state.foodType,
       foodName: this.state.foodName,
       parentId: userdata.userId,
       date: date,
-      id: entry
+      id: entry,
+
     },
     //     { 
     //   // headers: {
@@ -360,7 +383,12 @@ updatePost = (event, entry) => {
   .then(res => {
     console.log(res.data);
     this.setState({
-      entry: res.data
+      entry: res.data,
+      fullName: '',
+      mealTime: '',
+      foodType: '',
+      foodName: '',
+      updating: false
 })})
 
 .catch( error => console.log('OHHHH NOOOOO', error));
@@ -389,7 +417,7 @@ updatePost = (event, entry) => {
                     <P>{entry.mealTime} </P>
                     <P>{entry.foodType} </P>
                     <P>{entry.foodName} </P>
-                    <Update onClick={(event) => {this.deleteFoodEntry(event, entry.id)}}> Update </Update>
+                    <Update onClick={(event) => {this.toggleEdit(event, entry.id)}}> Update </Update>
               </Box>
         
               )
@@ -458,14 +486,14 @@ updatePost = (event, entry) => {
             <Box key = {entry.id}>
                 <HeaderDiv>
                   {/* <Delete onClick={(event) => {this.deleteFoodEntry(event, entry.id)}}> X </Delete>  */}
-                  <i class="fas fa-backspace" onClick={(event) => {this.deleteFoodEntry(event, entry.id)}}/>
+                  <i className = "fas fa-backspace" onClick={this.cancelEdit}/>
                   <Header> Meal Entry </Header>
                 </HeaderDiv>
                   <P>{entry.fullName} </P> 
                   <P>{entry.mealTime} </P>
                   <P>{entry.foodType} </P>
                   <P>{entry.foodName} </P>
-                  {/* <Update onClick={(event) => {this.deleteFoodEntry(event, entry.id)}}> Update </Update> */}
+                  <Update onClick={this.cancelEdit}> Cancel </Update>
             </Box>
       
             )
@@ -519,7 +547,9 @@ updatePost = (event, entry) => {
         value = {this.state.foodName}
         name = "foodName"
         onChange = {this.handleChanges}/>
-        <Button onClick = {this.postEntry}> Update Meal </Button>
+
+        <Button onClick={(event) => {this.updatePost(event, this.state.updatingId)}}> Update Meal </Button>
+
     </ChildForm> 
     </Wrapper>
     )
