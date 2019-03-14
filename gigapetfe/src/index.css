@@ -63,6 +63,44 @@ code {
   color: red;
 }
 
+.box {
+  animation: disco 1s linear infinite;
+}
+
+
+
+@keyframes disco{
+  0% {
+  transform: scale(1, 1);
+  
+}
+
+25% {
+  transform: scale(1.2, .85);
+  background: rgb(83, 8, 8);
+  
+}
+
+  50% {
+  transform: scale(.85, 1.2);
+  background: rgb(16, 48, 16);
+    
+  } 
+
+75% {
+  transform: scale(1.2, .85);
+  background: rgb(43, 43, 78);
+
+}
+
+  100% {
+  transform: scale(1, 1) rotate(0);
+  background: rgb(43, 16, 20);
+      
+  } 
+}
+
+
 @keyframes itsAlive {
   0% {
   transform: scale(1, 1);

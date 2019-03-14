@@ -131,30 +131,6 @@ const Update = styled.button`
     }
 `;
 
-// const Delete = styled.i`
-//     font-size: 3rem;
-//     transition: 500ms ease;
-// `;
-
-// const Delete = styled.i`
-//     border-radius: 5rem;
-//     font-size: 3rem;
-//     background: black;
-//     color: teal;
-//     padding: .5rem .8rem;
-//     border: 2px solid teal;
-//     transition: 500ms ease;
-
-//     :hover {
-//       color: red;
-//       border: 2px solid red;
-//     }
-
-//     :active {
-//       transform: scale(.9, .9)
-//     }
-// `;
-
 const url = "https://gigapetserver.herokuapp.com";
 
 export default class DayCard extends Component {
@@ -173,6 +149,7 @@ export default class DayCard extends Component {
 
         updating: false,
         updatingId: null,
+        disco: false
 
 
     };
@@ -373,11 +350,11 @@ updatePost = (event, entry) => {
       id: entry,
 
     },
-    //     { 
-    //   // headers: {
-    //   // Authorization: userdata.token
-    //   // }
-    // }
+        { 
+      headers: {
+      Authorization: userdata.token
+      }
+    }
     )
     
   .then(res => {
@@ -394,6 +371,17 @@ updatePost = (event, entry) => {
 .catch( error => console.log('OHHHH NOOOOO', error));
 }
 
+letsDisco = (event, entry) => {
+  event.preventDefault()
+  if(!this.state.disco){
+  this.setState({
+    disco: true
+  })} else {
+    this.setState({
+      disco: false
+    })
+  }
+}
 
 
 
@@ -410,7 +398,6 @@ updatePost = (event, entry) => {
               <Box key = {entry.id}>
                   <HeaderDiv>
                     <i className="fas fa-trash-alt" onClick={(event) => {this.deleteFoodEntry(event, entry.id)}}/>
-                    {/* <Delete onClick={(event) => {this.deleteFoodEntry(event, entry.id)}}> X </Delete>  */}
                     <Header> Meal Entry </Header>
                   </HeaderDiv>
                     <P>{entry.fullName} </P> 
@@ -460,8 +447,6 @@ updatePost = (event, entry) => {
                   <option value="wholeGrain">Whole Grain</option>
                   <option value="meat">Meat</option>
                   <option value="dairy">Dairy</option>
-                  <option value="fat">Fat</option>
-                  <option value="oil">Oil</option>
                   <option value="treats">Treats</option>
               </Select>
           </label>
@@ -483,9 +468,8 @@ updatePost = (event, entry) => {
          {this.state.entry.map((entry)=>{
             return (
               
-            <Box key = {entry.id}>
-                <HeaderDiv>
-                  {/* <Delete onClick={(event) => {this.deleteFoodEntry(event, entry.id)}}> X </Delete>  */}
+            <Box key = {entry.id} className = {this.state.disco ? 'box' : null}>
+                <HeaderDiv>      
                   <i className = "fas fa-backspace" onClick={this.cancelEdit}/>
                   <Header> Meal Entry </Header>
                 </HeaderDiv>
@@ -493,7 +477,7 @@ updatePost = (event, entry) => {
                   <P>{entry.mealTime} </P>
                   <P>{entry.foodType} </P>
                   <P>{entry.foodName} </P>
-                  <Update onClick={this.cancelEdit}> Cancel </Update>
+                  <Update onClick={this.letsDisco}> {this.state.disco ? 'The Disco never stops' : 'Disco'} </Update>
             </Box>
       
             )
@@ -536,8 +520,6 @@ updatePost = (event, entry) => {
                 <option value="wholeGrain">Whole Grain</option>
                 <option value="meat">Meat</option>
                 <option value="dairy">Dairy</option>
-                <option value="fat">Fat</option>
-                <option value="oil">Oil</option>
                 <option value="treats">Treats</option>
             </Select>
         </label>
