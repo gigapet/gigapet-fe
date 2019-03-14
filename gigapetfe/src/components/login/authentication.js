@@ -5,8 +5,8 @@ const url = "https://gigapetserver.herokuapp.com/";
 
 const authenticate = App => Login => 
     class extends React.Component{
-        constructor(){
-            super();
+        constructor(props){
+            super(props);
             this.state = ({
                 username: '',
                 password: '',
@@ -33,7 +33,7 @@ const authenticate = App => Login =>
         //requires username and password
         signIn = event => {
             event.persist();
-            axios
+            return axios
                 .post(`${url}api/users/login`,{
                     username: this.state.username,
                     password: this.state.password
@@ -58,6 +58,7 @@ const authenticate = App => Login =>
                 loggedIn: false
             })
             this.props.history.push('/login');
+
         }
 
 
