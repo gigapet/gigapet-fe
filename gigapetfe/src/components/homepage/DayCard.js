@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import moment from 'moment';
 
 const Title = styled.h1`
   color: white;
@@ -393,11 +394,14 @@ letsDisco = (event, entry) => {
 
 
   render() {
+    const date =  this.props.match.params.date;
+    let title = moment(date).format('MMM DD YYYY')
+
     if(this.state.updating === false){
     return (
       <Wrapper>
       <MealWrapper> 
-        <Title> Meal Entries </Title>
+        <Title> Meal Entries <h4>{title}</h4> </Title>
       <Div>
            {this.state.entry.map((entry)=>{
               return (
@@ -513,21 +517,21 @@ letsDisco = (event, entry) => {
         <label>
             <Select name = "mealTime" value={this.state.mealTime} onChange={this.handleChanges}>
                 <option value ="" disabled hidden>Update Meal...</option>
-                <option value="breakfast">Breakfast</option>
-                <option value="lunch">Lunch</option>
-                <option value="dinner">Dinner</option>
-                <option value="dessert">Dessert</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+                <option value="Dessert">Dessert</option>
             </Select>
         </label>
         <label>
             <Select name = "foodType" value = {this.state.foodType} onChange={this.handleChanges}>
                 <option value="" disabled hidden>Update Food Type...</option>
-                <option value="fruit">Fruit</option>
-                <option value="vegetable">Vegetable</option>
-                <option value="wholeGrain">Whole Grain</option>
-                <option value="meat">Meat</option>
-                <option value="dairy">Dairy</option>
-                <option value="treats">Treats</option>
+                <option value="Fruit">Fruit</option>
+                <option value="Vegetable">Vegetable</option>
+                <option value="WholeGrain">Whole Grain</option>
+                <option value="Meat">Meat</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Treats">Treats</option>
             </Select>
         </label>
         <Input 
