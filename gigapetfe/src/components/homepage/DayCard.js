@@ -15,7 +15,10 @@ const MealWrapper = styled.div`
     align-items: center;
     height: 100vh;
     width: 80%;
-`;
+
+    @media (max-width: 800px){
+      width: 100%;
+    }`;
 
 const Header = styled.h2`
     padding: 0rem;
@@ -95,6 +98,10 @@ const Select = styled.select`
 const Wrapper = styled.div`
 display: flex;
 flex-direction: row;
+
+ @media(max-width: 800px) {
+  flex-direction: column-reverse;
+}
 `;
 
 const Button = styled.button`

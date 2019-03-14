@@ -15,6 +15,11 @@ const Nav = styled.nav`
     border-bottom: 3px solid black;
     background: white;
     min-width: 100%;
+
+    @media (max-width: 50rem){
+        flex-direction: column;
+        padding: 0;
+    }
 `;
 
 const StyledNavLink = styled(Link)`
@@ -26,6 +31,12 @@ const StyledNavLink = styled(Link)`
 
     :hover {
         transform: scale(1.02, 1.02)
+        
+    }
+
+    @media (max-width: 50rem){
+        flex-direction: column;
+        padding: 0;
     }
 `;
 
@@ -38,6 +49,10 @@ const StyledLink = styled(Link)`
 
     :hover {
         transform: scale(1.03, 1.03)
+    }
+
+    @media (max-width: 50rem){
+        padding: 0;
     }
 `;
 
