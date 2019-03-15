@@ -54,7 +54,6 @@ const Servings = styled.div`
   flex-direction: column;
   align-items: center;
   border:  .5rem inset rgb(24, 23, 23);
-  // box-shadow: 2rem 2rem 1rem black;
   min-width: 30%;
   margin-bottom: 5rem;
   padding: 3rem 0;
@@ -79,7 +78,7 @@ const Item = styled.div`
   font-size:1.8rem;
   text-align:left;
   padding:1rem 0rem;
-  color:black;
+  color: white;
 
 `;
 

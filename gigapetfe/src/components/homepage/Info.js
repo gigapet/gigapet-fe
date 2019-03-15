@@ -58,7 +58,7 @@ export class Info extends React.Component {
             <Li>STEP 3: Once on your day, you can chose to add or edit a - Child / Food Selection </Li>
             <Li>STEP 4: Add Child - Simply type in child name and click "Add Child"</Li>
             <Li>STEP 5: Add Food - Fill out all food related fields and click "Add Meal"</Li>
-            <Li>STEP 6: Delete - Click the "X" in the corner of your meal entry, thats it!</Li>
+            <Li>STEP 6: Delete - Click the "Trash Can" in the corner of your meal entry, thats it!</Li>
         </Ul>
       </div>
     )

@@ -21,6 +21,7 @@ const MonthLabel = styled.h1`
   color: white;
   text-shadow: 1rem 1rem 1rem black;
   `;
+
   const Select = styled.select`
     width: 27.5rem;
     height: 5.5rem;
@@ -30,6 +31,7 @@ const MonthLabel = styled.h1`
     border: 2px solid black;
     text-align: right;
     padding-left: .5rem;
+
     :first-child {
       color: gray;
     }
@@ -38,8 +40,7 @@ const MonthLabel = styled.h1`
 const Label = styled.label`
     display:flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 5rem 0 5rem 0;
+    padding: 0rem 10rem 5rem 0;
     align-items: center;
 `;
 
@@ -50,7 +51,7 @@ const Servings = styled.div`
   border:  .5rem inset rgb(24, 23, 23);
   min-width: 30rem;
   max-width: 30rem;
-  margin: 0 auto;
+  margin: 0;
   padding: 3rem 0;
   background: rgb(78, 68, 68);
   border-radius: 2rem;
@@ -73,8 +74,20 @@ const Item = styled.div`
   font-size:1.8rem;
   text-align:left;
   padding:1rem 0rem;
-  color:black;
+  color: white;
 
+`;
+
+
+const Bottom = styled.div`
+padding-top: 5rem;
+display: flex;
+justify-content: center;
+
+@media (max-width: 500px){
+  flex-direction: column;
+  align-items: center;
+}
 `;
 
 const Run = styled.button`
@@ -244,7 +257,7 @@ const Run = styled.button`
           </MonthLabelContainer>
           <DayNames />
           <Week key={date} date={date.clone()} week={week} />
-          
+          <Bottom>
           <Label>
               <Select name="selectedChild" value={this.state.selectedChild} onChange={this.handleChanges}>
                     <option value ="" disabled hidden>Select Child...</option>
@@ -263,6 +276,7 @@ const Run = styled.button`
             <Item>Dairy Servings: {this.state.dairy}</Item>
             <Item>Treats Servings: {this.state.treats}</Item>
           </Servings>
+          </Bottom>
         </div>
       );
     }
