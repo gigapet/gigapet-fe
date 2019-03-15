@@ -80,7 +80,7 @@ class HomePageNav extends React.Component {
                 <StyledNavLink to= "/info" component = {Info}> Home </StyledNavLink>
                 <StyledNavLink to= "/month"  component = {Month}> Month </StyledNavLink>
                 <StyledNavLink to= "/month/week"  component = {WeekView}> Week </StyledNavLink>
-                <StyledNavLink to= {`/month/week/${moment().format('MM_DD_YYYY')}`} component = {Day}> Day </StyledNavLink>
+                <StyledNavLink to= {`/month/week/${moment().format('YYYY-MM-DD')}`} component = {Day}> Day </StyledNavLink>
                 <StyledLink to="/" onClick = {this.props.signOut} component = {LoginPage}> Logout </StyledLink>
             </Nav>
         </div>);

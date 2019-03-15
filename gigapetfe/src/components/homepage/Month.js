@@ -7,7 +7,6 @@ import styled from "styled-components";
 
 const CalendarGeneral = styled.div`
   color: white;
-  height: 100vh;
   padding: 1rem;
   overflow: hidden;
 `;
@@ -38,28 +37,79 @@ const Select = styled.select`
     border-radius: 1rem;
     border: 2px solid black;
     text-align: right;
-    padding-left: .5rem;
+    padding-left: 1rem;
     :first-child {
       color: gray;
     }
 
 `;
 const Label = styled.label`
-    display:flex;
+display:flex;
+flex-direction: column;
+align-items: center;
 `;
 
 const Servings = styled.div`
   display:flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  border:  .5rem inset rgb(24, 23, 23);
+  min-width: 30%;
+  margin-bottom: 5rem;
+  padding: 3rem 0;
+  background: rgb(78, 68, 68);
+  border-radius: 2rem;
+  transition: 500ms ease;
+  font-style: oblique;
 
+    :hover {
+    transition: 500ms ease;
+		color: white;
+		animation: none;
+    box-shadow: 2rem 2rem 1rem rgb(24, 23, 23);
+    }
+
+    @media (max-width: 500px){
+      width: 80%;
+      margin-top: 5rem;
+    }
 `;
 const Item = styled.div`
   font-size:1.8rem;
-  width:31%;
   text-align:left;
-  padding:1rem
-  color:black;
+  padding:1rem 0rem;
+  color: white;
 
+`;
+
+const Bottom = styled.div`
+padding-top: 5rem;
+display: flex;
+justify-content: space-evenly;
+
+@media (max-width: 500px){
+  flex-direction: column;
+  align-items: center;
+}
+`;
+
+const Run = styled.button`
+    padding: 2rem 9rem;
+    border: 1rem double rgb(78, 68, 68);
+    background: black;
+    color: white;
+    font-size: 1.8rem;
+    min-width: 14%;
+    border-radius: 2rem;
+    transition: 50ms ease;
+
+    :hover {
+      color: red;
+    }
+
+    :active {
+      transform: scale(.95, .95)
+    }
 `;
 
 const url = "https://gigapetserver.herokuapp.com";
@@ -71,72 +121,103 @@ export class Month extends Component {
     this.state = {
       month: moment(),
       servingsMonth: [],
-      vegetable:'',
-      fruit:'',
-      wholeGrain:'',
-      meat:'',
-      dairy:'',
-      treats:'',
-
-      children: [],
+      vegetable: 0,
+      fruit: 0,
+      wholeGrain: 0,
+      meat: 0,
+      dairy: 0,
+      treats: 0,
+      selectedChild: '',
+      children: []
     };
   }
 
   componentDidMount() {
-   // this.ServingMonth();
-   this.getChild()
-
+    this.ServingMonth();
+    this.getChild();
   }
 
-  // ServingMonth = () => {
-  //   const userdata = JSON.parse(localStorage.getItem("userdata"));
-  //   axios
-  //     .post(
-  //       `${url}/api/app/get_month_stats`,
-  //       {
-  //         parentId: userdata.userId
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: userdata.token
-  //         }
-  //       }
-  //     )
-  //     .then(res =>
-  //       this.setState({
-  //         servingsMonth: [...res.data] //  May need Changing
-  //       })
-  //     )
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // };
+  handleChanges = event => {
+    event.preventDefault();
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+  
+  ServingMonth = () => {
+    const userdata = JSON.parse(localStorage.getItem("userdata"));
+    console.log('running')
+    axios
+      .post(
+        `${url}/api/app/getstats`,
+        {
+          parentId: userdata.userId,
+          dateStart: this.state.month.startOf("month").format("YYYY-MM-DD"),
+          dateEnd: this.state.month.endOf("month").format("YYYY-MM-DD"),
+          fullName: this.state.selectedChild,
+        },
+        {
+          headers: {
+            Authorization: userdata.token
+          }
+        }
+      )
+      .then(res => {
+        let response = {
+          "vegetable": 0,
+          "meat": 0,
+          "fruit": 0,
+          "dairy": 0,
+          "wholeGrain": 0,
+          "treats": 0,
+        }
 
+        res.data.map(item => {
+          response[item.foodType] = item.count;
+        })
 
+        console.log(response);
+        this.setState({
+            vegetable: response["vegetable"],
+            meat: response["meat"],
+            fruit: response["fruit"],
+            dairy: response["dairy"],
+            wholeGrain: response["wholeGrain"],
+            treats: response["treats"]
+          })
+      }
+      )
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   //api/app/childnames
   getChild = () => {
-    const userdata = JSON.parse(localStorage.getItem('userdata'));
+    const userdata = JSON.parse(localStorage.getItem("userdata"));
     axios
-      .post(`${url}/api/app/childnames`, {
-        parentId: userdata.userId,
-      },
-      { 
-        headers: {
-        Authorization: userdata.token
-      }}
+      .post(
+        `${url}/api/app/childnames`,
+        {
+          parentId: userdata.userId
+        },
+        {
+          headers: {
+            Authorization: userdata.token
+          }
+        }
       )
       .then(res => {
         console.log(res.data);
         this.setState({
           children: [...res.data]
-        })
+        });
       })
 
       .catch(err => {
-        console.log(err)
-      })
-  }
+        console.log(err);
+      });
+  };
 
   previous = () => {
     const { month } = this.state;
@@ -144,7 +225,6 @@ export class Month extends Component {
     this.setState({
       month: month.subtract(1, "month")
     });
-    // this.ServingMonth();
   };
 
   next = () => {
@@ -153,7 +233,6 @@ export class Month extends Component {
     this.setState({
       month: month.add(1, "month")
     });
-    // this.ServingMonth();
   };
 
   renderWeeks() {
@@ -170,13 +249,7 @@ export class Month extends Component {
     const { month } = this.state;
 
     while (!done) {
-      weeks.push(
-        <Week
-          key={date}
-          date={date.clone()}
-          month={month}
-        />
-      );
+      weeks.push(<Week key={date} date={date.clone()} month={month} />);
 
       date.add(1, "w");
 
@@ -188,10 +261,8 @@ export class Month extends Component {
   }
 
   MonthDays = () => {
-    this.state.month.map(mon => (
-      mon.startOf("month")
-    ))
-  }
+    this.state.month.map(mon => mon.startOf("month"));
+  };
 
   renderMonthLabel() {
     const { month } = this.state;
@@ -217,14 +288,25 @@ export class Month extends Component {
           <DayNames />
         </header>
         <CalView>{this.renderWeeks()}</CalView>
+
+        <Bottom>
         <Label>
-            <Select name = "fullName" value={this.state.fullName}>
-                  <option value ="" disabled hidden>Select Child...</option>
-                  {this.state.children.map((child, index) => {
-                  return <option key = {index} value = {child.fullName}> {child.fullName} </option>
-                })}
+            <Select name="selectedChild" value={this.state.selectedChild} onChange={this.handleChanges}>
+              <option value="" disabled hidden>
+                Select Child...
+              </option>
+              {this.state.children.map((child, index) => {
+                return (
+                  <option key={index} value={child.fullName}>
+                    {" "}
+                    {child.fullName}{" "}
+                  </option>
+                );
+              })}
             </Select>
+            <Run onClick={() => this.ServingMonth()}>RUN</Run>
         </Label>
+        
         <Servings>
           <Item>Vegetable Servings: {this.state.vegetable}</Item>
           <Item>Fruit Servings: {this.state.fruit}</Item>
@@ -233,6 +315,7 @@ export class Month extends Component {
           <Item>Dairy Servings: {this.state.dairy}</Item>
           <Item>Treats Servings: {this.state.treats}</Item>
         </Servings>
+        </Bottom>
       </CalendarGeneral>
     );
   }

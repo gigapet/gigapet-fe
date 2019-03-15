@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import moment from 'moment';
 
 const Title = styled.h1`
   color: white;
@@ -68,15 +69,18 @@ border: 2px solid black;
 display: flex;
 flex-direction: column;
 margin: 5rem;
-width: 30rem;
-height: 30rem;
-justify-content: center;
+width: 32rem;
+height: 15;
+text-align: left;
 background: rgb(126, 116, 99);
+border-radius: 1rem;
 `;
 
 const P = styled.p`
     padding: 1rem 5rem;
-    margin: 0rem;
+    margin: 0;
+    margin-left: 1.5rem;
+    font-size: 1.8rem;
 `;
 
 const Select = styled.select`
@@ -391,13 +395,15 @@ letsDisco = (event, entry) => {
 }
 
 
-
   render() {
+    const date =  this.props.match.params.date;
+    let title = moment(date).format('MMM DD YYYY')
+    
     if(this.state.updating === false){
     return (
       <Wrapper>
       <MealWrapper> 
-        <Title> Meal Entries </Title>
+        <Title> Meal Entries <h4>{title}</h4> </Title>
       <Div>
            {this.state.entry.map((entry)=>{
               return (
@@ -407,10 +413,10 @@ letsDisco = (event, entry) => {
                     <i className="fas fa-trash-alt" onClick={(event) => {this.deleteFoodEntry(event, entry.id)}}/>
                     <Header> Meal Entry </Header>
                   </HeaderDiv>
-                    <P>{entry.fullName} </P> 
-                    <P>{entry.mealTime} </P>
-                    <P>{entry.foodType} </P>
-                    <P>{entry.foodName} </P>
+                    <P> Name: {entry.fullName.charAt(0).toUpperCase() + entry.fullName.slice(1)} </P> 
+                    <P> Meal: {entry.mealTime.charAt(0).toUpperCase() + entry.mealTime.slice(1)} </P>
+                    <P> Category: {entry.foodType.charAt(0).toUpperCase() + entry.foodType.slice(1)} </P>
+                    <P> Food: {entry.foodName.charAt(0).toUpperCase() + entry.foodName.slice(1)} </P>
                     <Update onClick={(event) => {this.toggleEdit(event, entry.id)}}> Update </Update>
               </Box>
         
@@ -450,7 +456,7 @@ letsDisco = (event, entry) => {
               <Select name = "foodType" value = {this.state.foodType} onChange={this.handleChanges}>
                   <option value="" disabled hidden>Select food type...</option>
                   <option value="fruit">Fruit</option>
-                  <option value="vegetable">Vegetable</option>
+                  <option value="vegetable">vegetable</option>
                   <option value="wholeGrain">Whole Grain</option>
                   <option value="meat">Meat</option>
                   <option value="dairy">Dairy</option>

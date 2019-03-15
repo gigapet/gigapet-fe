@@ -6,10 +6,15 @@ import authenticate from './components/login/authentication';
 import { withRouter } from 'react-router-dom';
 
 class App extends Component {
-  
-  componentDidMount() {
-    this.props.history.push('/login');
+
+  componentDidMount(){
+    console.log(window.location.pathname)
+
+    if(!localStorage.getItem("userdata") && window.location.pathname !== '/signup'){
+    this.props.history.push('./login');
+    }
   }
+
 
   render() {
     return (

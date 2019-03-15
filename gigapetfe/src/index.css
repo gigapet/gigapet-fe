@@ -65,8 +65,12 @@ code {
 
 .box {
   animation: disco 1s linear infinite;
+  color: white;
 }
 
+.box button {
+  background: white;
+}
 
 
 @keyframes disco{
