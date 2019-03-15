@@ -6,7 +6,7 @@ import authenticate from './components/login/authentication';
 import { withRouter } from 'react-router-dom';
 
 class App extends Component {
-    
+
   componentDidMount(){
     console.log(window.location.pathname)
 
@@ -14,7 +14,6 @@ class App extends Component {
     this.props.history.push('./login');
     }
   }
-
 
 
   render() {
